@@ -1,5 +1,169 @@
 {
-  "users": [],
-  "clubs": [],
-  "posts": []
+  "users": [
+    {
+      "id": 1,
+      "name": "Kelly",
+      "email": "kellynjogu09@gmail,com",
+      "password": "kelly123",
+      "avatar": "https://randomuser.me/api/portraits/women/2.jpg",
+      "joined": "2023-02-20"
+    },
+    {
+      "id": 2,
+      "name": "Jennifer",
+      "email": "jennifer@example.com",
+      "password": "jennifer123",
+      "avatar": "https://randomuser.me/api/portraits/women/3.jpg",
+      "joined": "2023-03-10"
+    }
+  ],
+  "clubs": [
+    {
+      "id": 1,
+      "name": "The Cinephiles",
+      "genre": "All",
+      "description": "For true film lovers who appreciate all genres of cinema.",
+      "members": 120,
+      "createdBy": 1,
+      "createdAt": "2023-01-20",
+      "image": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": 2,
+      "name": "Indie Film Society",
+      "genre": "Indie",
+      "description": "Celebrating independent cinema from around the world.",
+      "members": 85,
+      "createdBy": 2,
+      "createdAt": "2023-02-15",
+      "image": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": 3,
+      "name": "Classic Cinema Club",
+      "genre": "Classic",
+      "description": "Exploring the golden age of Hollywood and international classics.",
+      "members": 150,
+      "createdBy": 3,
+      "createdAt": "2023-03-05",
+      "image": "https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": 4,
+      "name": "Sci-Fi Universe",
+      "genre": "Sci-Fi",
+      "description": "For fans of science fiction across all media.",
+      "members": 95,
+      "createdBy": 1,
+      "createdAt": "2023-04-10",
+      "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      "id": 5,
+      "name": "Horror House",
+      "genre": "Horror",
+      "description": "Where horror fans come to discuss their favorite scary movies.",
+      "members": 110,
+      "createdBy": 2,
+      "createdAt": "2023-05-15",
+      "image": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "clubId": 1,
+      "title": "Just watched 'The Silent Echo'",
+      "content": "The Silent Echo is a cinematic journey that transcends the boundaries of traditional storytelling. The performances are nothing short of captivating!",
+      "createdAt": "2023-06-01T14:30:00Z",
+      "likes": 24,
+      "comments": 5
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "clubId": 3,
+      "title": "Classic Film Recommendation: 'Casablanca'",
+      "content": "Rewatched 'Casablanca' last night. The dialogue, the performances, the atmosphere - it's perfect filmmaking that still holds up today.",
+      "createdAt": "2023-06-05T09:15:00Z",
+      "likes": 18,
+      "comments": 3
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "clubId": 4,
+      "title": "Best Sci-Fi Movies of the Decade?",
+      "content": "What are your top sci-fi films from the last 10 years? I'm looking for recommendations beyond the mainstream blockbusters.",
+      "createdAt": "2023-06-10T16:45:00Z",
+      "likes": 32,
+      "comments": 12
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "userId": 2,
+      "content": "Completely agree! The cinematography was stunning.",
+      "createdAt": "2023-06-01T15:10:00Z"
+    },
+    {
+      "id": 2,
+      "postId": 1,
+      "userId": 3,
+      "content": "I cried three times watching this. So powerful!",
+      "createdAt": "2023-06-01T16:45:00Z"
+    },
+    {
+      "id": 3,
+      "postId": 3,
+      "userId": 1,
+      "content": "Have you seen 'Arrival'? One of my favorites!",
+      "createdAt": "2023-06-10T17:30:00Z"
+    }
+  ],
+  "genres": [
+    { "name": "Action" },
+    { "name": "Comedy" },
+    { "name": "Drama" },
+    { "name": "Sci-Fi" },
+    { "name": "Horror" },
+    { "name": "Thriller" },
+    { "name": "Romance" },
+    { "name": "Documentary" },
+    { "name": "Animation" },
+    { "name": "Classic" },
+    { "name": "Indie" }
+  ],
+  "movies": [
+    {
+      "id": 1,
+      "title": "The Silent Echo",
+      "year": 2022,
+      "genre": ["Drama"],
+      "director": "Sarah Chen",
+      "rating": 4.8,
+      "poster": "https://m.media-amazon.com/images/M/MV5BZDY3ZGI0ZDAtMThlNy00MzAxLTg4YjAtNjkwYTkxNmQ4MjdlXkEyXkFqcGdeQXVyMTM1MTE1NDMx._V1_FMjpg_UX1000_.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Casablanca",
+      "year": 1942,
+      "genre": ["Classic", "Drama", "Romance"],
+      "director": "Michael Curtiz",
+      "rating": 4.9,
+      "poster": "https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Arrival",
+      "year": 2016,
+      "genre": ["Sci-Fi", "Drama"],
+      "director": "Denis Villeneuve",
+      "rating": 4.7,
+      "poster": "https://m.media-amazon.com/images/M/MV5BNGU0NTA2YjctYWNlYy00ZDg1LTg5ZTItZWM3MWZiMDI5OGYzL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNDM3ODU2NDM@._V1_.jpg"
+    }
+  ]
 }
