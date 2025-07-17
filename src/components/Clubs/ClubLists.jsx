@@ -24,7 +24,6 @@ const ClubLists = () => {
 
   return (
     <div className="container">
-      <h2>Clubs</h2>
       <div className="clubs-grid">
         {clubs.map((club) => (
           <div key={club.id} className="club-card">

@@ -21,12 +21,18 @@
       "name": "Kelly",
       "email": "kellynjogu09@gmail.com",
       "password": "kelly123"
+    },
+    {
+      "id": "1c0c",
+      "name": "Kelly",
+      "email": "kellynjogu09@gmail.com",
+      "password": "kelly123"
     }
   ],
   "clubs": [
     {
       "id": "1",
-      "name": "The Cinephiles",
+      "name": "Thee  Cinephiles",
       "genre": "Sci-Fi",
       "description": "For true film lovers ",
       "members": 120,
