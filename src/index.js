@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { configureStore } from '@reduxjs/toolkit';
+import commentReducer from './store/commentSlice';
+import postReducer from './store/postSlice';
+import ratingReducer from './store/ratingSlice';
+import trackerReducer from './store/trackerSlice';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+export const store = configureStore({
+  reducer: {
+    comments: commentReducer,
+    posts: postReducer,
+    ratings: ratingReducer,
+    tracker: trackerReducer,
+  },
+});
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+export default store; // Ensure this line exists for default export

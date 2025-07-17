@@ -1,0 +1,61 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "nyaguthii",
+      "email": "nyaguthii@example.com",
+      "bio": "Movie lover",
+      "avatar": "https://example.com/avatar1.png"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Just watched Oppenheimer!",
+      "content": "Mind-blowing cinematography!",
+      "rating": 5,
+      "comments": [1, 2]
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "userId": 1,
+      "text": "I agree! Nolan nailed it."
+    },
+    {
+      "id": 2,
+      "postId": 1,
+      "userId": 1,
+      "text": "Especially the score 🔥"
+    }
+  ],
+  "ratings": [
+    {
+      "id": 1,
+      "postId": 1,
+      "userId": 1,
+      "value": 5
+    }
+  ],
+  "trackers": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Oppenheimer",
+      "status": "Watched",
+      "watchedDate": "2025-07-17"
+    }
+  ],
+  "clubs": [
+    {
+      "id": 1,
+      "name": "Sci-Fi Addicts",
+      "genre": "Sci-Fi",
+      "description": "Club for sci-fi lovers",
+      "members": [1]
+    }
+  ]
+}
