@@ -12,19 +12,16 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<h1>Welcome to Film Fanatics</h1>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/clubs" element={<ClubLists />} />
-          <Route path="/clubs/:id" element={<ClubDetails />} />      
-          <Route path="/clubs/:id/edit" element={<EditClub />} />    
-          <Route path="/create-club" element={<CreateClub />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<h1 style={{ textAlign: 'center', padding: '2rem' }}>Welcome to Film Fanatics</h1>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/clubs" element={<ClubLists />} />
+        <Route path="/clubs/:id" element={<ClubDetails />} />      
+        <Route path="/clubs/:id/edit" element={<EditClub />} />    
+        <Route path="/create-club" element={<CreateClub />} />
+      </Routes>
     </>
   );
 }
-
 export default App;

@@ -145,6 +145,12 @@
       "id": "de24",
       "name": "New Member",
       "clubId": 1
+    },
+    {
+      "id": "9546",
+      "name": "Kelly",
+      "avatar": "https://ui-avatars.com/api/?name=Kelly",
+      "clubId": 2
     }
   ],
   "posts": [
