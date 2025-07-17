@@ -4,6 +4,8 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import ClubLists from './components/Clubs/ClubLists';
 import CreateClub from './components/Clubs/CreateClub';
+import ClubDetails from './components/Clubs/ClubDetails'; 
+import EditClub from './components/Clubs/EditClub';       
 import './index.css';
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/clubs" element={<ClubLists />} />
+          <Route path="/clubs/:id" element={<ClubDetails />} />      
+          <Route path="/clubs/:id/edit" element={<EditClub />} />    
           <Route path="/create-club" element={<CreateClub />} />
         </Routes>
       </div>
