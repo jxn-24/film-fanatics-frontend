@@ -117,6 +117,12 @@
       "clubId": 1,
       "title": "Dune",
       "year": 2021
+    },
+    {
+      "id": "cc66",
+      "title": "Woking man",
+      "year": "2025",
+      "clubId": 1
     }
   ],
   "members": [
@@ -129,6 +135,16 @@
       "id": 2,
       "clubId": 1,
       "name": "Jennifer"
+    },
+    {
+      "id": "b80e",
+      "name": "New Member",
+      "clubId": 1
+    },
+    {
+      "id": "de24",
+      "name": "New Member",
+      "clubId": 1
     }
   ],
   "posts": [
@@ -139,8 +155,17 @@
       "title": "Just watched 'The Silent Echo'",
       "content": "The Silent Echo is a cinematic journey that transcends the boundaries of traditional storytelling. The performances are nothing short of captivating!",
       "createdAt": "2023-06-01T14:30:00Z",
-      "likes": 24,
-      "comments": 5
+      "likes": 27,
+      "comments": 7,
+      "likedBy": [
+        "Kelly"
+      ],
+      "commentsList": [
+        {
+          "user": "Kelly",
+          "text": "This one was great"
+        }
+      ]
     },
     {
       "id": "2",
