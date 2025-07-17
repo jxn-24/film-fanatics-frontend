@@ -6,13 +6,21 @@ const CreateClub = () => {
   const [name, setName] = useState('');
   const [genre, setGenre] = useState('');
   const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3001/clubs', { name, genre, description });
+      await axios.post('http://localhost:3001/clubs', {
+        name,
+        genre,
+        description,
+        image: image || 'https://via.placeholder.com/300x200',
+        members: 0,
+        createdAt: new Date().toISOString()
+      });
       navigate('/clubs');
     } catch (err) {
       setError('Failed to create club');
@@ -59,10 +67,21 @@ const CreateClub = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">Create Club</button>
+        <div className="form-group">
+          <label>Club Image URL</label>
+          <input
+            type="url"
+            className="form-control"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            placeholder="https://..."
+          />
+        </div>
+        <button type="submit" className="btn btn-green">Create Club</button>
       </form>
     </div>
   );
 };
 
 export default CreateClub;
+
