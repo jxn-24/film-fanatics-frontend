@@ -11,11 +11,16 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/users', { email, password });
-      localStorage.setItem('user', JSON.stringify(response.data));
-      navigate('/clubs');
+      const response = await axios.get(`http://localhost:3001/users?email=${email}&password=${password}`);
+      if (response.data.length > 0) {
+        localStorage.setItem('user', JSON.stringify(response.data[0]));
+        navigate('/clubs');
+      } else {
+        setError('Invalid credentials');
+      }
     } catch (err) {
-      setError('Invalid credentials');
+      console.error(err);
+      setError('Something went wrong. Please try again.');
     }
   };
 
