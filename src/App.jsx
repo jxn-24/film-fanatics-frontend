@@ -18,7 +18,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/posts" element={<PostList />} />
+        <Route path="/explore" element={<PostList />} />
         <Route path="/posts/:postId" element={<PostDetails />} />
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/profile" element={<Profile />} />
