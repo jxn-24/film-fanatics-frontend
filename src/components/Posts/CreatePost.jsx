@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, Camera, Film, Send } from 'lucide-react';
 import { useDispatch } from 'react-redux';
-import { addPost } from '../store/PostSlice';
+import { addPost } from '../../store/postSlice';
 
 const CreatePost = ({ onCancel }) => {
   const dispatch = useDispatch();

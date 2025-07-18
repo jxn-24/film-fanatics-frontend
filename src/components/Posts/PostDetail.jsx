@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Heart, MessageCircle, Share2, Send, X } from 'lucide-react';
-import { addComment } from '../store/CommentSlice';
-import { likePost } from '../store/PostSlice';
+import { addComment } from '../../store/commentSlice';
+import { likePost } from '../../store/postSlice';
 import { Link, useParams } from 'react-router-dom';
 
 const PostDetails = () => {

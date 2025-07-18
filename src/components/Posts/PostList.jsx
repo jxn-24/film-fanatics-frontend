@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Heart, MessageCircle, Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { likePost } from '../store/PostSlice';
+import { likePost } from '../../store/postSlice';
 import { useDispatch } from 'react-redux';
 
 const PostList = () => {
@@ -23,6 +23,7 @@ const PostList = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <h2 className="text-2xl font-bold mb-6">Posts</h2>
+        <Link to="/create-post" className="btn btn-primary mb-6 inline-block">Create Post</Link>
         {posts.length === 0 ? (
           <div className="bg-white rounded-lg shadow-sm p-8 text-center">
             <p className="text-gray-500 text-lg">No posts yet. Create one now!</p>
