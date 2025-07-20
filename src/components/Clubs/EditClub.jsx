@@ -1,99 +1,88 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { setClubs } from '../../redux/clubsSlice';
 
-const EditClub = () => {
+function EditClub() {
   const { id } = useParams();
+  const [name, setName] = useState('');
+  const [genre, setGenre] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState(null);
   const navigate = useNavigate();
-  const [clubData, setClubData] = useState({ name: '', genre: '', description: '', image: '' });
-  const [error, setError] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchClub = async () => {
-      try {
-        const res = await axios.get(`http://localhost:3001/clubs/${id}`);
-        setClubData(res.data);
-      } catch (err) {
-        setError('Failed to fetch club data');
-      }
-    };
-    fetchClub();
+    axios.get(`${process.env.REACT_APP_API_URL}/clubs/${id}`)
+      .then((response) => {
+        const club = response.data;
+        setName(club.name);
+        setGenre(club.genre);
+        setDescription(club.description);
+      })
+      .catch((error) => console.error('Error fetching club:', error));
   }, [id]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setClubData((prev) => ({ ...prev, [name]: value }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('genre', genre);
+    formData.append('description', description);
+    if (image) formData.append('image', image);
+
     try {
-      await axios.put(`http://localhost:3001/clubs/${id}`, clubData);
+      await axios.put(`${process.env.REACT_APP_API_URL}/clubs/${id}`, formData);
+      
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/clubs`);
+      dispatch(setClubs(response.data));
       navigate(`/clubs/${id}`);
-    } catch (err) {
-      setError('Failed to update club');
+    } catch (error) {
+      console.error('Error updating club:', error);
     }
   };
 
   return (
-    <div className="container">
+    <div className="card">
       <h2>Edit Club</h2>
-      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Club Name</label>
-          <input
-            type="text"
-            className="form-control"
-            name="name"
-            value={clubData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Genre</label>
-          <select
-            className="form-control"
-            name="genre"
-            value={clubData.genre}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select genre</option>
-            <option value="Action">Action</option>
-            <option value="Comedy">Comedy</option>
-            <option value="Drama">Drama</option>
-            <option value="Sci-Fi">Sci-Fi</option>
-            <option value="Horror">Horror</option>
-            <option value="Classic">Classic</option>
-            <option value="Indie">Indie</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Description</label>
-          <textarea
-            className="form-control"
-            name="description"
-            value={clubData.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Image URL</label>
-          <input
-            type="text"
-            className="form-control"
-            name="image"
-            value={clubData.image}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-green">Update Club</button>
+        <input
+          type="text"
+          placeholder="Club Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <select value={genre} onChange={(e) => setGenre(e.target.value)} required>
+          <option value="">Select Genre</option>
+          <option value="Sci-Fi">Sci-Fi</option>
+          <option value="Drama">Drama</option>
+          <option value="Action">Action</option>
+          <option value="Comedy">Comedy</option>
+          <option value="Classic">Classic</option>
+          <option value="Horror">Horror</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Romance">Romance</option>
+          <option value="Documentary">Documentary</option>
+          <option value="Animation">Animation</option>
+          <option value="Indie">Indie</option>
+        </select>
+        <textarea
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
+        />
+        <button type="submit">Save Changes</button>
       </form>
     </div>
   );
-};
+}
 
 export default EditClub;
