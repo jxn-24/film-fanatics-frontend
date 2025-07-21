@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Heart, MessageCircle, Share2, Send, X } from 'lucide-react';
-import { addComment } from '../store/CommentSlice';
-import { likePost } from '../store/PostSlice';
+import { Heart, MessageCircle, Share2, Send, X, CornerDownLeft } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
 const PostDetails = () => {
   const { postId } = useParams();
   const dispatch = useDispatch();
   const post = useSelector(state => state.posts.posts.find(p => p.id.toString() === postId));
-  const comments = useSelector(state => state.comments.comments.filter(c => c.postId.toString() === postId));
+  const comments = useSelector(state => state.comments.comments.filter(c => c.postId.toString() === postId && !c.parentId));
+  const replies = useSelector(state => state.comments.comments.filter(c => c.postId.toString() === postId && c.parentId));
   const [commentText, setCommentText] = useState('');
+  const [replyTexts, setReplyTexts] = useState({});
+  const [replyingTo, setReplyingTo] = useState(null);
 
   if (!post) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -26,14 +27,38 @@ const PostDetails = () => {
     e.preventDefault();
     if (commentText.trim()) {
       dispatch(addComment({
-        id: Date.now(),
         postId: post.id,
         content: commentText,
-        user: 'Current User', // In a real app, this would be the authenticated user
-        timestamp: new Date().toISOString()
+        user: 'Current User',
+        timestamp: new Date().toISOString(),
+        parentId: null
       }));
       setCommentText('');
     }
+  };
+
+  const handleReplyChange = (commentId, text) => {
+    setReplyTexts(prev => ({ ...prev, [commentId]: text }));
+  };
+
+  const handleReplySubmit = (e, commentId) => {
+    e.preventDefault();
+    const replyText = replyTexts[commentId];
+    if (replyText && replyText.trim()) {
+      dispatch(addComment({
+        postId: post.id,
+        content: replyText,
+        user: 'Current User',
+        timestamp: new Date().toISOString(),
+        parentId: commentId
+      }));
+      setReplyTexts(prev => ({ ...prev, [commentId]: '' }));
+      setReplyingTo(null);
+    }
+  };
+
+  const handleLikeComment = (commentId) => {
+    dispatch(likeComment(commentId));
   };
 
   const formatDate = (dateString) => {
@@ -92,18 +117,89 @@ const PostDetails = () => {
             {comments.length === 0 ? (
               <p className="text-gray-500">No comments yet. Be the first to comment!</p>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {comments.map(comment => (
-                  <div key={comment.id} className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
-                      {comment.user[0]}
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <p className="font-medium">{comment.user}</p>
-                        <p className="text-sm text-gray-500">{formatDate(comment.timestamp)}</p>
+                  <div key={comment.id} className="space-y-2">
+                    <div className="flex items-start space-x-4">
+                      <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
+                        {comment.user[0]}
                       </div>
-                      <p className="text-gray-700">{comment.content}</p>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <p className="font-medium">{comment.user}</p>
+                          <p className="text-sm text-gray-500">{formatDate(comment.timestamp)}</p>
+                        </div>
+                        <p className="text-gray-700">{comment.content}</p>
+                        <div className="flex items-center space-x-4 mt-2 text-gray-500">
+                          <button
+                            onClick={() => handleLikeComment(comment.id)}
+                            className="flex items-center space-x-1 hover:text-red-500 transition-colors"
+                          >
+                            <Heart className={`w-4 h-4 ${comment.liked ? 'text-red-500 fill-current' : ''}`} />
+                            <span>{comment.likes || 0}</span>
+                          </button>
+                          <button
+                            onClick={() => setReplyingTo(comment.id)}
+                            className="flex items-center space-x-1 hover:text-blue-500 transition-colors"
+                          >
+                            <CornerDownLeft className="w-4 h-4" />
+                            <span>Reply</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Replies */}
+                    <div className="ml-14 space-y-4">
+                      {replies.filter(r => r.parentId === comment.id).map(reply => (
+                        <div key={reply.id} className="flex items-start space-x-4">
+                          <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-teal-500 rounded-full flex items-center justify-center text-white font-bold">
+                            {reply.user[0]}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between">
+                              <p className="font-medium">{reply.user}</p>
+                              <p className="text-sm text-gray-500">{formatDate(reply.timestamp)}</p>
+                            </div>
+                            <p className="text-gray-700">{reply.content}</p>
+                            <div className="flex items-center space-x-4 mt-2 text-gray-500">
+                              <button
+                                onClick={() => handleLikeComment(reply.id)}
+                                className="flex items-center space-x-1 hover:text-red-500 transition-colors"
+                              >
+                                <Heart className={`w-4 h-4 ${reply.liked ? 'text-red-500 fill-current' : ''}`} />
+                                <span>{reply.likes || 0}</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+
+                      {/* Reply Form */}
+                      {replyingTo === comment.id && (
+                        <form onSubmit={(e) => handleReplySubmit(e, comment.id)} className="flex items-start space-x-4">
+                          <textarea
+                            value={replyTexts[comment.id] || ''}
+                            onChange={(e) => handleReplyChange(comment.id, e.target.value)}
+                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            rows="2"
+                            placeholder="Write a reply..."
+                          />
+                          <button
+                            type="submit"
+                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                          >
+                            <Send className="w-5 h-5" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setReplyingTo(null)}
+                            className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
+                          >
+                            <X className="w-5 h-5" />
+                          </button>
+                        </form>
+                      )}
                     </div>
                   </div>
                 ))}

@@ -12,7 +12,7 @@ function LandingPage() {
           <p>
             Join our community of movie & TV series enthusiasts. Discuss, share, and explore your passion for cinema as of 12:36 AM EAT on Friday, July 18, 2025.
           </p>
-          <button className="btn btn-primary">Get Started</button>
+          <Link to="/login" className="btn btn-primary">Get Started</Link>
         </div>
       </section>
 
@@ -39,7 +39,7 @@ function LandingPage() {
       <section className="cta-section">
         <h2>Ready to Dive In?</h2>
         <p>Sign up today and become a part of the Film Fanatics community as of 12:36 AM EAT on Friday, July 18, 2025.</p>
-        <button className="btn btn-primary">Join Now</button>
+        <Link to="/register" className="btn btn-primary">Join Now</Link>
       </section>
 
       {/* Footer */}

@@ -1,13 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Heart, MessageCircle, Share2 } from 'lucide-react';
+import { Heart, MessageCircle, Share2, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { likePost } from '../store/PostSlice';
 import { useDispatch } from 'react-redux';
+
 
 const PostList = () => {
   const posts = useSelector(state => state.posts.posts);
   const dispatch = useDispatch();
+
+  // Debug: Log posts to check Redux state
+  console.log('Posts in PostList:', posts);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -20,37 +23,59 @@ const PostList = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-6">Posts</h2>
+    <div className="page-container">
+      <div className="container">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-primary">Explore</h2>
+          <Link
+            to="/create-post"
+            className="btn btn-primary flex items-center space-x-2"
+          >
+            <Plus className="w-5 h-5" />
+            <span>Create Post</span>
+          </Link>
+        </div>
         {posts.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-            <p className="text-gray-500 text-lg">No posts yet. Create one now!</p>
-            <Link to="/create-post" className="mt-4 inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+          <div className="card text-center">
+            <p className="text-secondary text-lg">No posts yet. Create one now!</p>
+            <Link
+              to="/create-post"
+              className="btn btn-primary mt-4 inline-block"
+            >
               Create Post
             </Link>
           </div>
         ) : (
           <div className="space-y-6">
             {posts.map(post => (
-              <div key={post.id} className="bg-white rounded-lg shadow-sm p-6">
+              <div key={post.id} className="card">
+                <div className="flex items-center mb-3">
+                  <div className="follower mr-3">
+                    <img
+                      src="/api/placeholder/40/40"
+                      alt={`${post.user}'s avatar`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <p className="text-primary font-bold">{post.user || 'Unknown User'}</p>
+                </div>
                 <Link to={`/posts/${post.id}`} className="block">
-                  <h3 className="font-bold text-lg mb-2">{post.title}</h3>
+                  <h3 className="font-bold text-lg mb-2 text-primary">{post.title}</h3>
                 </Link>
                 {post.movieTitle && (
-                  <p className="text-gray-600 mb-2">About: <span className="font-medium">{post.movieTitle}</span></p>
+                  <p className="text-secondary mb-2">About: <span className="font-medium">{post.movieTitle}</span></p>
                 )}
-                <p className="text-gray-700 mb-4">{post.content}</p>
+                <p className="text-secondary mb-4">{post.content}</p>
                 {post.image && (
-                  <div className="mb-4">
+                  <div className="post-image mb-4">
                     <img
                       src={post.image}
                       alt="Post image"
-                      className="w-full h-48 object-cover rounded-lg"
+                      className="w-full h-48 object-cover rounded"
                     />
                   </div>
                 )}
-                <div className="flex items-center space-x-6 text-gray-500">
+                <div className="flex items-center space-x-6 text-secondary">
                   <button
                     onClick={() => dispatch(likePost(post.id))}
                     className="flex items-center space-x-2 hover:text-red-500 transition-colors"
