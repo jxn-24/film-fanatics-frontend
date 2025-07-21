@@ -27,12 +27,18 @@
       "name": "Kelly",
       "email": "kellynjogu09@gmail.com",
       "password": "kelly123"
+    },
+    {
+      "id": "ff73",
+      "name": "Kelly",
+      "email": "kellynjogu09@gmail.com",
+      "password": "kelly123"
     }
   ],
   "clubs": [
     {
       "id": "1",
-      "name": "Thee  Cinephiles",
+      "name": "Thee ",
       "genre": "Sci-Fi",
       "description": "For true film lovers ",
       "members": 120,
@@ -42,9 +48,9 @@
     },
     {
       "id": "2",
-      "name": "Indie Film Society",
+      "name": "Indie Film",
       "genre": "Indie",
-      "description": "Celebrating independent cinema from around the world.",
+      "description": "Celebrating independent cinema ",
       "members": 85,
       "createdBy": 2,
       "createdAt": "2023-02-15",
@@ -72,7 +78,7 @@
     },
     {
       "id": "5",
-      "name": "Horror House",
+      "name": "Horror House 1",
       "genre": "Horror",
       "description": "Simply scary.",
       "members": 110,
@@ -123,6 +129,12 @@
       "title": "Woking man",
       "year": "2025",
       "clubId": 1
+    },
+    {
+      "id": "2c12",
+      "title": "WR",
+      "year": "2021",
+      "clubId": 1
     }
   ],
   "members": [
@@ -151,6 +163,12 @@
       "name": "Kelly",
       "avatar": "https://ui-avatars.com/api/?name=Kelly",
       "clubId": 2
+    },
+    {
+      "id": "cf55",
+      "name": "Kelly",
+      "avatar": "https://ui-avatars.com/api/?name=Kelly",
+      "clubId": 5
     }
   ],
   "posts": [
