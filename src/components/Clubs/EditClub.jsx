@@ -1,88 +1,110 @@
+// src/components/Clubs/EditClub.jsx
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { setClubs } from '../../redux/clubsSlice';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-function EditClub() {
+const EditClub = () => {
   const { id } = useParams();
-  const [name, setName] = useState('');
-  const [genre, setGenre] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [clubData, setClubData] = useState(null);
+  const [form, setForm] = useState({ name: '', genre: '', description: '', image: '' });
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/clubs/${id}`)
-      .then((response) => {
-        const club = response.data;
-        setName(club.name);
-        setGenre(club.genre);
-        setDescription(club.description);
-      })
-      .catch((error) => console.error('Error fetching club:', error));
+    const fetchClub = async () => {
+      try {
+        const res = await axios.get(`http://localhost:3001/clubs/${id}`);
+        setClubData(res.data);
+        setForm({
+          name: res.data.name,
+          genre: res.data.genre,
+          description: res.data.description,
+          image: res.data.image,
+        });
+      } catch (error) {
+        console.error('Error fetching club:', error);
+      }
+    };
+    fetchClub();
   }, [id]);
 
-  const handleSubmit = async (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('genre', genre);
-    formData.append('description', description);
-    if (image) formData.append('image', image);
+    if (!user || user.id !== clubData.creatorId) {
+      alert('You are not authorized to edit this club.');
+      return;
+    }
 
     try {
-      await axios.put(`${process.env.REACT_APP_API_URL}/clubs/${id}`, formData);
-      
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/clubs`);
-      dispatch(setClubs(response.data));
+      await axios.patch(`http://localhost:3001/clubs/${id}`, form);
       navigate(`/clubs/${id}`);
     } catch (error) {
       console.error('Error updating club:', error);
     }
   };
 
+  if (!clubData) return <div>Loading...</div>;
+
   return (
-    <div className="card">
-      <h2>Edit Club</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Club Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <select value={genre} onChange={(e) => setGenre(e.target.value)} required>
-          <option value="">Select Genre</option>
-          <option value="Sci-Fi">Sci-Fi</option>
-          <option value="Drama">Drama</option>
-          <option value="Action">Action</option>
-          <option value="Comedy">Comedy</option>
-          <option value="Classic">Classic</option>
-          <option value="Horror">Horror</option>
-          <option value="Thriller">Thriller</option>
-          <option value="Romance">Romance</option>
-          <option value="Documentary">Documentary</option>
-          <option value="Animation">Animation</option>
-          <option value="Indie">Indie</option>
-        </select>
-        <textarea
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files[0])}
-        />
-        <button type="submit">Save Changes</button>
-      </form>
+    <div className="container">
+      <div className="card">
+        <h2 className="text-center">Edit Club</h2>
+        <form onSubmit={handleUpdate}>
+          <div className="form-group">
+            <input
+              type="text"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="Club Name"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="genre"
+              value={form.genre}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="Genre"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <textarea
+              name="description"
+              value={form.description}
+              onChange={handleChange}
+              className="form-control"
+              rows="4"
+              placeholder="Description"
+              required
+            ></textarea>
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="image"
+              value={form.image}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="Image URL"
+            />
+          </div>
+          <button type="submit" className="btn btn-green" style={{ width: '100%' }}>
+            Update Club
+          </button>
+        </form>
+      </div>
     </div>
   );
-}
+};
 
 export default EditClub;

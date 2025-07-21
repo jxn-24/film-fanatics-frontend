@@ -1,48 +1,63 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// src/components/Auth/Login.jsx
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../../store/authSlice';
+import { loginUser } from '../../store/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleChange = e => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:3001/login', { email, password });
-      dispatch(login(response.data));
-      navigate('/');
-    } catch (error) {
-      console.error('Login failed:', error);
+    dispatch(loginUser(credentials));
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      navigate('/clubs');
+    } else {
+      setError('Invalid email or password');
     }
   };
 
   return (
-    <div className="card">
-      <h2>Login</h2>
+    <div className="auth-container">
+      <h2 className="text-center">Login</h2>
+      {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
+        <div className="form-group">
+          <input
+            type="email"
+            name="email"
+            className="form-control"
+            placeholder="Email"
+            value={credentials.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="password"
+            name="password"
+            className="form-control"
+            placeholder="Password"
+            value={credentials.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-green" style={{ width: '100%' }}>
+          Sign In
+        </button>
       </form>
-      <p>
-        Forgot password? <a href="/forgot-password">Reset here</a>
+      <p className="text-center" style={{ marginTop: '20px' }}>
+        Don't have an account? <a href="/register">Register</a>
       </p>
     </div>
   );
