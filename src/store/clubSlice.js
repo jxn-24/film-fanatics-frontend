@@ -1,33 +1,23 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-export const fetchClubs = createAsyncThunk('clubs/fetch', async () => {
-  const res = await axios.get('http://localhost:3001/clubs');
-  return res.data;
-});
+import { createSlice } from '@reduxjs/toolkit';
 
 const clubSlice = createSlice({
   name: 'clubs',
   initialState: {
     clubs: [],
-    status: 'idle',
-    error: null,
   },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchClubs.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchClubs.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.clubs = action.payload;
-      })
-      .addCase(fetchClubs.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      });
+  reducers: {
+    setClubs: (state, action) => {
+      state.clubs = action.payload;
+    },
+    updateClub: (state, action) => {
+      const updatedClub = action.payload;
+      const index = state.clubs.findIndex((club) => club.id === updatedClub.id);
+      if (index !== -1) {
+        state.clubs[index] = updatedClub;
+      }
+    },
   },
 });
 
+export const { setClubs, updateClub } = clubSlice.actions;
 export default clubSlice.reducer;

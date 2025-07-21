@@ -1,22 +1,25 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "Kelly",
-      "email": "kellynjogu09@gmail,com",
-      "password": "kelly123",
-      "avatar": "https://randomuser.me/api/portraits/women/2.jpg",
-      "joined": "2023-02-20"
+      "id": 1,
+      "username": "Kelly",
+      "email": "kellynjogu09@gmail.com",
+      "password_hash": "kelly123",
+      "bio": "Movie enthusiast who loves sci-fi and drama."
     },
     {
-      "id": "2",
-      "name": "Jennifer",
-      "email": "jennifer@example.com",
-      "password": "jennifer123",
-      "avatar": "https://randomuser.me/api/portraits/women/3.jpg",
-      "joined": "2023-03-10"
+      "id": 2,
+      "username": "User2",
+      "email": "user2@example.com",
+      "password_hash": "hashed_password2",
+      "bio": "Loves classic films and documentaries."
     },
     {
+      "id": 3,
+      "username": "User3",
+      "email": "user3@example.com",
+      "password_hash": "hashed_password3",
+      "bio": "Sci-fi and thriller fan."
       "id": "c7c8",
       "name": "Kelly",
       "email": "kellynjogu09@gmail.com",
@@ -37,16 +40,17 @@
   ],
   "clubs": [
     {
+      "id": 1,
+      "name": "Thee Cinephiles",
       "id": "1",
       "name": "Thee ",
       "genre": "Sci-Fi",
-      "description": "For true film lovers ",
-      "members": 120,
-      "createdBy": 1,
-      "createdAt": "2023-01-20",
-      "image": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+      "description": "For true film lovers",
+      "image_url": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
     },
     {
+      "id": 2,
+      "name": "Classic Film Club",
       "id": "2",
       "name": "Indie Film",
       "genre": "Indie",
@@ -60,16 +64,15 @@
       "id": "3",
       "name": "Classic Cinema Club",
       "genre": "Classic",
-      "description": "Exploring the golden age of Hollywood and international classics.",
-      "members": 150,
-      "createdBy": 3,
-      "createdAt": "2023-03-05",
-      "image": "https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+      "description": "A club for lovers of timeless cinema.",
+      "image_url": "https://example.com/classic-club.jpg"
     },
     {
-      "id": "4",
-      "name": "Sci-Fi Universe",
+      "id": 3,
+      "name": "Sci-Fi Explorers",
       "genre": "Sci-Fi",
+      "description": "Exploring the best sci-fi films of the decade.",
+      "image_url": "https://example.com/sci-fi-explorers.jpg"
       "description": "For fans of science fiction across all media.",
       "members": 95,
       "createdBy": 1,
@@ -173,150 +176,113 @@
   ],
   "posts": [
     {
-      "id": "1",
-      "userId": 1,
-      "clubId": 1,
-      "title": "Just watched 'The Silent Echo'",
+      "id": 1,
+      "user_id": 1,
+      "club_id": 1,
       "content": "The Silent Echo is a cinematic journey that transcends the boundaries of traditional storytelling. The performances are nothing short of captivating!",
-      "createdAt": "2023-06-01T14:30:00Z",
-      "likes": 27,
-      "comments": 7,
-      "likedBy": [
-        "Kelly"
-      ],
-      "commentsList": [
-        {
-          "user": "Kelly",
-          "text": "This one was great"
-        }
-      ]
+      "created_at": "2023-06-01T14:30:00Z"
     },
     {
-      "id": "2",
-      "userId": 2,
-      "clubId": 3,
-      "title": "Classic Film Recommendation: 'Casablanca'",
+      "id": 2,
+      "user_id": 2,
+      "club_id": 2,
       "content": "Rewatched 'Casablanca' last night. The dialogue, the performances, the atmosphere - it's perfect filmmaking that still holds up today.",
-      "createdAt": "2023-06-05T09:15:00Z",
-      "likes": 18,
-      "comments": 3
+      "created_at": "2023-06-05T09:15:00Z"
     },
     {
-      "id": "3",
-      "userId": 3,
-      "clubId": 4,
-      "title": "Best Sci-Fi Movies of the Decade?",
+      "id": 3,
+      "user_id": 3,
+      "club_id": 3,
       "content": "What are your top sci-fi films from the last 10 years? I'm looking for recommendations beyond the mainstream blockbusters.",
-      "createdAt": "2023-06-10T16:45:00Z",
-      "likes": 32,
-      "comments": 12
+      "created_at": "2023-06-10T16:45:00Z"
     }
   ],
   "comments": [
     {
-      "id": "1",
-      "postId": 1,
-      "userId": 2,
+      "id": 1,
+      "post_id": 1,
+      "user_id": 1,
+      "content": "This one was great",
+      "created_at": "2023-06-01T14:35:00Z"
+    },
+    {
+      "id": 2,
+      "post_id": 1,
+      "user_id": 2,
       "content": "Completely agree! The cinematography was stunning.",
-      "createdAt": "2023-06-01T15:10:00Z"
+      "created_at": "2023-06-01T15:10:00Z"
     },
     {
-      "id": "2",
-      "postId": 1,
-      "userId": 3,
+      "id": 3,
+      "post_id": 1,
+      "user_id": 3,
       "content": "I cried three times watching this. So powerful!",
-      "createdAt": "2023-06-01T16:45:00Z"
+      "created_at": "2023-06-01T16:45:00Z"
     },
     {
-      "id": "3",
-      "postId": 3,
-      "userId": 1,
+      "id": 4,
+      "post_id": 3,
+      "user_id": 1,
       "content": "Have you seen 'Arrival'? One of my favorites!",
-      "createdAt": "2023-06-10T17:30:00Z"
+      "created_at": "2023-06-10T17:30:00Z"
     }
   ],
-  "genres": [
+  "ratings": [
     {
-      "name": "Action",
-      "id": "1700"
+      "id": 1,
+      "post_id": 1,
+      "user_id": 1,
+      "rating": 5
     },
     {
-      "name": "Comedy",
-      "id": "ac41"
+      "id": 2,
+      "post_id": 1,
+      "user_id": 2,
+      "rating": 4
     },
     {
-      "name": "Drama",
-      "id": "03b8"
+      "id": 3,
+      "post_id": 1,
+      "user_id": 3,
+      "rating": 5
     },
     {
-      "name": "Sci-Fi",
-      "id": "d436"
+      "id": 4,
+      "post_id": 2,
+      "user_id": 2,
+      "rating": 5
     },
     {
-      "name": "Horror",
-      "id": "bd9a"
-    },
-    {
-      "name": "Thriller",
-      "id": "a0b8"
-    },
-    {
-      "name": "Romance",
-      "id": "cdbf"
-    },
-    {
-      "name": "Documentary",
-      "id": "8f15"
-    },
-    {
-      "name": "Animation",
-      "id": "b4bb"
-    },
-    {
-      "name": "Classic",
-      "id": "6862"
-    },
-    {
-      "name": "Indie",
-      "id": "12b1"
+      "id": 5,
+      "post_id": 3,
+      "user_id": 1,
+      "rating": 4
     }
   ],
-  "movies": [
+  "watched_movies": [
     {
-      "id": "1",
-      "title": "The Silent Echo",
-      "year": 2022,
-      "genre": [
-        "Drama"
-      ],
-      "director": "Sarah Chen",
-      "rating": 4.8,
-      "poster": "https://m.media-amazon.com/images/M/MV5BZDY3ZGI0ZDAtMThlNy00MzAxLTg4YjAtNjkwYTkxNmQ4MjdlXkEyXkFqcGdeQXVyMTM1MTE1NDMx._V1_FMjpg_UX1000_.jpg"
+      "id": 1,
+      "user_id": 1,
+      "movie_title": "Blade Runner 2049",
+      "watched_at": "2023-06-01T10:00:00Z"
     },
     {
-      "id": "2",
-      "title": "Casablanca",
-      "year": 1942,
-      "genre": [
-        "Classic",
-        "Drama",
-        "Romance"
-      ],
-      "director": "Michael Curtiz",
-      "rating": 4.9,
-      "poster": "https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_.jpg"
+      "id": 2,
+      "user_id": 1,
+      "movie_title": "The Silent Echo",
+      "watched_at": "2023-06-01T12:00:00Z"
     },
     {
-      "id": "3",
-      "title": "Arrival",
-      "year": 2016,
-      "genre": [
-        "Sci-Fi",
-        "Drama"
-      ],
-      "director": "Denis Villeneuve",
-      "rating": 4.7,
-      "poster": "https://m.media-amazon.com/images/M/MV5BNGU0NTA2YjctYWNlYy00ZDg1LTg5ZTItZWM3MWZiMDI5OGYzL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNDM3ODU2NDM@._V1_.jpg"
+      "id": 3,
+      "user_id": 2,
+      "movie_title": "Casablanca",
+      "watched_at": "2023-06-05T08:00:00Z"
+    },
+    {
+      "id": 4,
+      "user_id": 3,
+      "movie_title": "Arrival",
+      "watched_at": "2023-06-10T15:00:00Z"
     }
   ]
 }

@@ -1,57 +1,49 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/authSlice';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`http://localhost:3001/users?email=${email}&password=${password}`);
-      if (response.data.length > 0) {
-        localStorage.setItem('user', JSON.stringify(response.data[0]));
-        navigate('/clubs');
-      } else {
-        setError('Invalid credentials');
-      }
-    } catch (err) {
-      console.error(err);
-      setError('Something went wrong. Please try again.');
+      const response = await axios.post('http://localhost:3001/login', { email, password });
+      dispatch(login(response.data));
+      navigate('/');
+    } catch (error) {
+      console.error('Login failed:', error);
     }
   };
 
   return (
-    <div className="auth-container">
-      <h2>Welcome back</h2>
-      {error && <p className="error">{error}</p>}
+    <div className="card">
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Log in</button>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Login</button>
       </form>
-      <p>New to Film Fanatics? <a href="/register">Sign up</a></p>
+      <p>
+        Forgot password? <a href="/forgot-password">Reset here</a>
+      </p>
     </div>
   );
 };

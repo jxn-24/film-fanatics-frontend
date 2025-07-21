@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {useDispatch} from 'react-redux';
+import { login } from '../../store/authSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -6,60 +8,53 @@ const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/users', { name, email, password });
-      localStorage.setItem('user', JSON.stringify(response.data));
-      navigate('/clubs');
-    } catch (err) {
-      setError('Registration failed');
+      const response = await axios.post('http://localhost:3001/users', { username, email, password });
+      dispatch(login(response.data));
+      navigate('/');
+    } catch (error) {
+      console.error('Registration failed:', error);
     }
   };
 
+
   return (
-    <div className="auth-container">
-      <h2>Sign up</h2>
-      {error && <p className="error">{error}</p>}
+    <div className="card">
+      <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name</label>
-          <input
-            type="text"
-            className="form-control"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Sign up</button>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Register</button>
       </form>
-      <p>By signing up, you agree to our Terms of Service and Privacy Policy.</p>
+      <p>
+        By signing up, you agree to our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.
+      </p>
     </div>
   );
-};
+}
 
 export default Register;
