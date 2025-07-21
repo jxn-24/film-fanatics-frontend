@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaUsers, FaPlus, FaUser } from 'react-icons/fa';
 import { useSelector } from 'react-redux';

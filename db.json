@@ -20,75 +20,50 @@
       "email": "user3@example.com",
       "password_hash": "hashed_password3",
       "bio": "Sci-fi and thriller fan."
-      "id": "c7c8",
-      "name": "Kelly",
-      "email": "kellynjogu09@gmail.com",
-      "password": "kelly123"
-    },
-    {
-      "id": "1c0c",
-      "name": "Kelly",
-      "email": "kellynjogu09@gmail.com",
-      "password": "kelly123"
-    },
-    {
-      "id": "ff73",
-      "name": "Kelly",
-      "email": "kellynjogu09@gmail.com",
-      "password": "kelly123"
     }
   ],
   "clubs": [
     {
       "id": 1,
       "name": "Thee Cinephiles",
-      "id": "1",
-      "name": "Thee ",
       "genre": "Sci-Fi",
       "description": "For true film lovers",
-      "image_url": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+      "image_url": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      "members": 120,
+      "createdBy": 1,
+      "createdAt": "2023-01-20"
     },
     {
       "id": 2,
       "name": "Classic Film Club",
-      "id": "2",
-      "name": "Indie Film",
       "genre": "Indie",
-      "description": "Celebrating independent cinema ",
+      "description": "Celebrating independent cinema",
+      "image_url": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       "members": 85,
       "createdBy": 2,
-      "createdAt": "2023-02-15",
-      "image": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-    },
-    {
-      "id": "3",
-      "name": "Classic Cinema Club",
-      "genre": "Classic",
-      "description": "A club for lovers of timeless cinema.",
-      "image_url": "https://example.com/classic-club.jpg"
+      "createdAt": "2023-02-15"
     },
     {
       "id": 3,
       "name": "Sci-Fi Explorers",
       "genre": "Sci-Fi",
       "description": "Exploring the best sci-fi films of the decade.",
-      "image_url": "https://example.com/sci-fi-explorers.jpg"
-      "description": "For fans of science fiction across all media.",
+      "image_url": "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       "members": 95,
       "createdBy": 1,
-      "createdAt": "2023-04-10",
-      "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+      "createdAt": "2023-04-10"
     },
     {
-      "id": "5",
-      "name": "Horror House 1",
-      "genre": "Horror",
-      "description": "Simply scary.",
-      "members": 110,
+      "id": 4,
+      "name": "Classic Cinema Club",
+      "genre": "Classic",
+      "description": "A club for lovers of timeless cinema.",
+      "image_url": "https://example.com/classic-club.jpg",
+      "members": 70,
       "createdBy": 2,
-      "createdAt": "2023-05-15",
-      "image": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+      "createdAt": "2023-05-15"
     },
+
     {
       "id": "1565",
       "name": "OPS",

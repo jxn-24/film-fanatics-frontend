@@ -7,7 +7,6 @@ const CreateClub = () => {
   const [genre, setGenre] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
-  //const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
