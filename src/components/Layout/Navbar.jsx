@@ -13,12 +13,11 @@ const Navbar = () => {
   return (
     <nav className="navbar styled-navbar">
       <div className="container navbar-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 20px', backgroundColor: 'white' }}>
-        {/* Left: Logo */}
+
         <div className="logo-title" style={{ fontSize: '24px', fontWeight: 'bold', color: '#1b5e20' }}>
           Film Fanatics
         </div>
 
-        {/* Right: Nav Links */}
         <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Link to="/" className="nav-link-box">Home</Link>
           <Link to="/clubs" className="nav-link-box">Clubs</Link>

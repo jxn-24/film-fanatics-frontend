@@ -1,4 +1,3 @@
-// src/store/clubSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -7,7 +6,6 @@ export const fetchClubs = createAsyncThunk('clubs/fetchClubs', async () => {
   return response.data;
 });
 
-// ✅ Add this if you are joining a club and want to store membership
 export const joinClub = createAsyncThunk('clubs/joinClub', async ({ userId, clubId }) => {
   const response = await axios.post('http://localhost:3001/memberships', {
     userId,
