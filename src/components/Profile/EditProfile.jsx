@@ -1,31 +1,44 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
-const EditProfile = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = useSelector(state => state.auth?.user) || { name: '', bio: '', avatar: '' }; // Fallback if no auth slice
-
+const EditProfile = ({ initialData, onSave, onCancel }) => {
   const [formData, setFormData] = useState({
-    name: user.name || '',
-    bio: user.bio || '',
-    avatar: user.avatar || '',
+    name: '',
+    bio: '',
+    avatar: '',
   });
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        name: initialData.name || '',
+        bio: initialData.bio || '',
+        avatar: initialData.avatar || '',
+      });
+    }
+  }, [initialData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setError('');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Placeholder: Dispatch update profile action (replace with your team's auth action)
-    dispatch({
-      type: 'auth/updateProfile',
-      payload: formData,
-    });
-    navigate('/profile');
+    if (!formData.name.trim()) {
+      setError('Username is required');
+      return;
+    }
+    if (onSave) {
+      onSave(formData);
+    }
+  };
+
+  const handleCancel = () => {
+    if (onCancel) {
+      onCancel();
+    }
   };
 
   return (
@@ -34,6 +47,7 @@ const EditProfile = () => {
         <h2 className="text-2xl font-bold text-primary mb-6">Edit Profile</h2>
         <div className="edit-container">
           <form onSubmit={handleSubmit} className="form-container">
+            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
             <div>
               <label className="form-label">Username</label>
               <input
@@ -72,7 +86,7 @@ const EditProfile = () => {
               <button
                 type="button"
                 className="btn btn-cancel"
-                onClick={() => navigate('/profile')}
+                onClick={handleCancel}
               >
                 Cancel
               </button>

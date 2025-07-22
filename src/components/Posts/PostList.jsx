@@ -1,9 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Heart, MessageCircle, Share2, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
 
 const PostList = () => {
   const posts = useSelector(state => state.posts.posts);
@@ -77,7 +75,7 @@ const PostList = () => {
                 )}
                 <div className="flex items-center space-x-6 text-secondary">
                   <button
-                    onClick={() => dispatch(likePost(post.id))}
+                    onClick={() => dispatch({ type: 'posts/likePost', payload: post.id })}
                     className="flex items-center space-x-2 hover:text-red-500 transition-colors"
                   >
                     <Heart className={`w-5 h-5 ${post.liked ? 'text-red-500 fill-current' : ''}`} />

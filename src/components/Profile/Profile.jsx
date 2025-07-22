@@ -1,38 +1,123 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Heart, MessageCircle, Share2, Users, Film, Calendar, MapPin } from 'lucide-react';
 import EditProfile from './EditProfile';
 
 const FilmfanaticsProfile = () => {
   const [activeTab, setActiveTab] = useState('watched');
-  const [isFollowing, setIsFollowing] = useState(false);
+  // Change followButtonState to track: 'follow' | 'message' | 'unfollow'
+  const [followButtonState, setFollowButtonState] = useState(() => {
+    // Initialize from localStorage if available
+    const saved = localStorage.getItem('followButtonState');
+    return saved ? saved : 'follow';
+  });
+
+  // Persist followButtonState to localStorage on change
+  useEffect(() => {
+    localStorage.setItem('followButtonState', followButtonState);
+  }, [followButtonState]);
+
+  // State to control chat modal visibility
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  // Placeholder chat component/modal
+  const ChatModal = () => {
+    const [messages, setMessages] = React.useState([
+      { id: 1, sender: 'them', text: 'Hi there!' },
+      { id: 2, sender: 'me', text: 'Hello! How are you?' },
+    ]);
+    const [input, setInput] = React.useState('');
+
+    const handleSend = () => {
+      if (input.trim() === '') return;
+      setMessages(prev => [...prev, { id: prev.length + 1, sender: 'me', text: input }]);
+      setInput('');
+    };
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSend();
+      }
+    };
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg p-6 w-96 flex flex-col">
+          <h2 className="text-xl font-bold mb-4">Chat with {profileData.name}</h2>
+          <div className="mb-4 h-48 border border-gray-300 rounded p-2 overflow-y-auto flex flex-col space-y-2">
+            {messages.length === 0 && (
+              <p className="text-gray-500 italic">No messages yet.</p>
+            )}
+            {messages.map(msg => (
+              <div
+                key={msg.id}
+                className={`p-2 rounded max-w-xs ${
+                  msg.sender === 'me' ? 'bg-blue-500 text-white self-end' : 'bg-gray-200 self-start'
+                }`}
+              >
+                {msg.text}
+              </div>
+            ))}
+          </div>
+          <textarea
+            className="border border-gray-300 rounded p-2 mb-2 resize-none"
+            rows={2}
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Type your message..."
+          />
+          <button
+            onClick={handleSend}
+            className="btn btn-primary w-full"
+          >
+            Send
+          </button>
+          <button
+            onClick={() => setIsChatOpen(false)}
+            className="btn btn-secondary w-full mt-2"
+          >
+            Close Chat
+          </button>
+        </div>
+      </div>
+    );
+  };
   const [isEditing, setIsEditing] = useState(false);
   const [showFollowingList, setShowFollowingList] = useState(false);
 
   // Sample data
-  const [profileData, setProfileData] = useState({
-    name: 'Sophia Bennett',
-    bio: 'Film enthusiast with a passion for indie cinema and classic films. Always looking for hidden gems and thought-provoking stories as of 12:27 AM EAT on Friday, July 18, 2025.',
-    location: 'Los Angeles, CA',
-    website: 'https://sophiabennett.com',
-    email: 'sophia@example.com',
-    phone: '+1 (555) 123-4567',
-    birthdate: '1995-06-15',
-    favoriteGenres: ['Drama', 'Thriller', 'Independent'],
-    isPrivate: false,
-    allowMessages: true,
-    showEmail: false,
-    showPhone: false,
-    followersCount: 245,
-    followingCount: 180,
-    moviesWatchedCount: 89,
-    followingUsers: [
-      { id: 1, name: 'Alice Johnson' },
-      { id: 2, name: 'Bob Smith' },
-      { id: 3, name: 'Charlie Brown' },
-      { id: 4, name: 'Diana Prince' },
-      { id: 5, name: 'Ethan Hunt' }
-    ]
+  const [profileData, setProfileData] = React.useState(() => {
+    const saved = localStorage.getItem('profileData');
+    return saved ? JSON.parse(saved) : {
+      name: 'Sophia Bennett',
+      bio: 'Film enthusiast with a passion for indie cinema and classic films. Always looking for hidden gems and thought-provoking stories as of 12:27 AM EAT on Friday, July 18, 2025.',
+      location: 'Los Angeles, CA',
+      website: 'https://sophiabennett.com',
+      email: 'sophia@example.com',
+      phone: '+1 (555) 123-4567',
+      birthdate: '1995-06-15',
+      favoriteGenres: ['Drama', 'Thriller', 'Independent'],
+      isPrivate: false,
+      allowMessages: true,
+      showEmail: false,
+      showPhone: false,
+      followersCount: 245,
+      followingCount: 180,
+      moviesWatchedCount: 89,
+      followingUsers: [
+        { id: 1, name: 'Alice Johnson' },
+        { id: 2, name: 'Bob Smith' },
+        { id: 3, name: 'Charlie Brown' },
+        { id: 4, name: 'Diana Prince' },
+        { id: 5, name: 'Ethan Hunt' }
+      ]
+    };
   });
+
+  React.useEffect(() => {
+    localStorage.setItem('profileData', JSON.stringify(profileData));
+  }, [profileData]);
 
   const toggleFollowingList = () => {
     setShowFollowingList(!showFollowingList);
@@ -206,13 +291,28 @@ const FilmfanaticsProfile = () => {
               </p>
             </div>
             <div className="flex space-x-3">
-              <button className="btn btn-secondary">Follow</button>
+              <button className="btn btn-secondary">Following</button>
               <button 
-                onClick={() => setIsFollowing(!isFollowing)}
-                className={`btn ${isFollowing ? 'btn-secondary' : 'btn-primary'}`}
+                onClick={() => {
+                  if (followButtonState === 'follow') {
+                    setFollowButtonState('message');
+                  } else if (followButtonState === 'message') {
+                    // Open chat modal
+                    setIsChatOpen(true);
+                  }
+                }}
+                className={`btn ${followButtonState === 'message' ? 'btn-secondary' : 'btn-primary'}`}
               >
-                {isFollowing ? 'Following' : 'Follow'}
+                {followButtonState === 'message' ? 'Message' : 'Follow'}
               </button>
+              {followButtonState === 'message' && (
+                <button
+                  onClick={() => setFollowButtonState('follow')}
+                  className="btn btn-secondary ml-2"
+                >
+                  Unfollow
+                </button>
+              )}
               <button
                 onClick={() => setIsEditing(true)}
                 className="btn btn-primary"
@@ -291,6 +391,7 @@ const FilmfanaticsProfile = () => {
           </>
         )}
       </div>
+      {isChatOpen && <ChatModal />}
     </div>
   );
 };

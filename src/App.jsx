@@ -15,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/posts" element={<PostList />} />
         <Route path="/explore" element={<PostList />} />
         <Route path="/create-post" element={<CreatePost onCancel={() => window.history.back()} />} />
