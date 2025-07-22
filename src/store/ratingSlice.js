@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const commentSlice = createSlice({
-  name: 'comments',
+const ratingSlice = createSlice({
+  name: 'ratings',
   initialState: {
-    comments: [],
+    ratings: [],
   },
   reducers: {
     setRatings: (state, action) => {
@@ -23,5 +23,5 @@ const commentSlice = createSlice({
   },
 });
 
-export const { setComments, addComment } = commentSlice.actions;
-export default commentSlice.reducer;
+export const { setRatings, addRating } = ratingSlice.actions;
+export default ratingSlice.reducer;

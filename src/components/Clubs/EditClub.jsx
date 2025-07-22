@@ -14,7 +14,7 @@ function EditClub() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/clubs/${id}`)
+    axios.get(`${import.meta.env.VITE_APP_API_URL}/clubs/${id}`)
       .then((response) => {
         const club = response.data;
         setName(club.name);
@@ -33,9 +33,9 @@ function EditClub() {
     if (image) formData.append('image', image);
 
     try {
-      await axios.put(`${process.env.REACT_APP_API_URL}/clubs/${id}`, formData);
+      await axios.put(`${import.meta.env.VITE_APP_API_URL}/clubs/${id}`, formData);
       
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/clubs`);
+      const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/clubs`);
       dispatch(setClubs(response.data));
       navigate(`/clubs/${id}`);
     } catch (error) {

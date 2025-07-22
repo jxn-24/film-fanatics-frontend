@@ -1,31 +1,33 @@
 import React, { useState } from 'react';
-import {useDispatch} from 'react-redux';
-import { login } from '../../store/authSlice';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setUser } from '../../store/authSlice';
 
-const Register = () => {
-  const [name, setName] = useState('');
+function Register() {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [error, setError] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     try {
-      const response = await axios.post('http://localhost:3001/users', { username, email, password });
-      dispatch(login(response.data));
-      navigate('/');
-    } catch (error) {
-      console.error('Registration failed:', error);
+      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/register`, { username, email, password });
+      dispatch(setUser(response.data.user));
+      navigate('/login');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Registration failed');
     }
   };
 
-
   return (
-    <div className="card">
+    <div>
       <h2>Register</h2>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -50,9 +52,6 @@ const Register = () => {
         />
         <button type="submit">Register</button>
       </form>
-      <p>
-        By signing up, you agree to our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.
-      </p>
     </div>
   );
 }

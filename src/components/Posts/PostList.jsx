@@ -1,33 +1,47 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchPosts } from '../../store/postSlice';
 
 function PostList() {
-  const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.posts);
-  const status = useSelector((state) => state.posts.status);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchPosts());
-    }
-  }, [status, dispatch]);
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/posts`);
+        setPosts(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        setLoading(false);
+      }
+    };
+    fetchPosts();
+  }, []);
+
+  if (loading) {
+    return <p>Loading posts...</p>;
+  }
 
   return (
-    <div className="container">
+    <div>
       <h2>Posts</h2>
-      {status === 'loading' && <p>Loading...</p>}
-      {status === 'failed' && <p>Error loading posts</p>}
-      {posts.map((post) => (
-        <div key={post.id} className="card">
-          <h3>{post.title}</h3>
-          <p>{post.content}</p>
-          <Link to={`/posts/${post.id}`}>View Details</Link>
-        </div>
-      ))}
-      <Link to="/posts/create">Create New Post</Link>
+      {posts.length === 0 ? (
+        <p>No posts found.</p>
+      ) : (
+        <ul>
+          {posts.map((post) => (
+            <li key={post.id}>
+              <Link to={`/posts/${post.id}`}>
+                <h3>{post.content}</h3>
+                <p>By User ID: {post.user_id}</p>
+                <p>In Club ID: {post.club_id}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

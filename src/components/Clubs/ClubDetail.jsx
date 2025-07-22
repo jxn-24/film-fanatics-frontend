@@ -11,11 +11,11 @@ function ClubDetails() {
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/clubs/${id}`)
+    axios.get(`${import.meta.env.VITE_APP_API_URL}/clubs/${id}`)
       .then((response) => setClub(response.data))
       .catch((error) => console.error('Error fetching club:', error));
 
-    axios.get(`${process.env.REACT_APP_API_URL}/posts?club_id=${id}`)
+    axios.get(`${import.meta.env.VITE_APP_API_URL}/posts?club_id=${id}`)
       .then((response) => setPosts(response.data))
       .catch((error) => console.error('Error fetching posts:', error));
   }, [id]);

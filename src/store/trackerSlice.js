@@ -15,5 +15,5 @@ const trackerSlice = createSlice({
   },
 });
 
-export const { setComments, addComment } = commentSlice.actions;
-export default commentSlice.reducer;
+export const { setWatchedMovies, addWatchedMovie } = trackerSlice.actions;
+export default trackerSlice.reducer;

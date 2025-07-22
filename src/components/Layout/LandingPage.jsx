@@ -10,7 +10,7 @@ function LandingPage() {
   const [clubs, setClubs] = useState([]);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/clubs`)
+    axios.get(`${import.meta.env.VITE_APP_API_URL}/clubs`)
       .then((response) => setClubs(response.data.slice(0, 3))) // Show up to 3 featured clubs
       .catch((error) => console.error('Error fetching clubs:', error));
   }, []);
