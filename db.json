@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "Kelly",
       "email": "kellynjogu09@gmail.com",
       "password": "kelly123",
@@ -10,39 +10,100 @@
   ],
   "clubs": [
     {
-      "id": 1,
-      "name": "Sci-Fi Universe",
-      "genre": "Sci-Fi",
-      "description": "Explore futuristic, techy films with like-minded fans.",
-      "image": "https://source.unsplash.com/400x300/?sci-fi",
-      "creatorId": 1,
-      "members": [1],
-      "watchlist": ["The Matrix", "Arrival", "Blade Runner 2049"],
-      "topMovie": "Interstellar"
+      "id": "1",
+      "name": "Action Movie Buffs",
+      "genre": "Action",
+      "members": 120,
+      "image": "/club_images/action_buffs.jpeg"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Laugh Riot",
       "genre": "Comedy",
-      "description": "Share laughs and comedy classics.",
-      "image": "https://source.unsplash.com/400x300/?comedy",
-      "creatorId": 1,
-      "members": [],
-      "watchlist": ["Superbad", "Step Brothers"],
-      "topMovie": "The Hangover"
+      "members": 85,
+      "image": "/club_images/laugh_riot.jpeg"
+    },
+    {
+      "id": "3",
+      "name": "Drama Queens & Kings",
+      "genre": "Drama",
+      "members": 150,
+      "image": "/club_images/drama_1.jpeg"
+    },
+    {
+      "id": "4",
+      "name": "Sci-Fi Universe",
+      "genre": "Sci-Fi",
+      "members": 110,
+      "image": "/club_images/scifi_1.jpeg"
+    },
+    {
+      "id": "5",
+      "name": "Horror Haven",
+      "genre": "Horror",
+      "members": 90,
+      "image": "/club_images/horror_1.jpeg"
+    },
+    {
+      "id": "6",
+      "name": "Romantic Escapades",
+      "genre": "Romance",
+      "members": 75,
+      "image": "/club_images/romance_1.jpeg"
+    },
+    {
+      "id": "7",
+      "name": "Documentary Enthusiasts",
+      "genre": "Documentary",
+      "members": 60,
+      "image": "/club_images/documentary_club.jpeg"
+    },
+    {
+      "id": "8",
+      "name": "Animated Adventures",
+      "genre": "Animation",
+      "members": 100,
+      "image": "/club_images/animation_1.jpeg"
+    },
+    {
+      "id": "9",
+      "name": "Thriller Seekers",
+      "genre": "Thriller",
+      "members": 80,
+      "image": "/club_images/thriller_1.jpeg"
+    },
+    {
+      "id": "10",
+      "name": "Fantasy Realms",
+      "genre": "Fantasy",
+      "members": 95,
+      "image": "public/club_images/fantasy_1.jpeg"
+    },
+    {
+      "id": "e3df",
+      "name": "components",
+      "genre": "Documentary",
+      "description": "living in the moment",
+      "image": "blob:http://localhost:5174/cca82360-a97f-44bb-96a8-90ca76aac313",
+      "members": 0,
+      "watchlist": [],
+      "topMovie": ""
     }
   ],
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 1,
       "user": "Kelly",
       "text": "Interstellar was a journey through space and time.",
       "likes": 10,
-      "comments": ["Absolutely!", "Great visuals."]
+      "comments": [
+        "Absolutely!",
+        "Great visuals."
+      ]
     },
     {
-      "id": 2,
+      "id": "2",
       "userId": 1,
       "user": "Kelly",
       "text": "I just joined the Sci-Fi Universe club 🚀",
@@ -52,14 +113,52 @@
   ],
   "comments": [
     {
-      "id": 1,
+      "id": "1",
       "postId": 1,
       "text": "Absolutely!"
     },
     {
-      "id": 2,
+      "id": "2",
       "postId": 1,
       "text": "Great visuals."
+    }
+  ],
+  "trending": [
+    {
+      "title": "The Last Frontier",
+      "genre": "Action, Adventure",
+      "image": "public/backgrounds/the_last_frontier.jpeg",
+      "id": "f368"
+    },
+    {
+      "title": "Echoes of the Past",
+      "genre": "Drama, History",
+      "image": "public/backgrounds/echoes_of_the_past.jpeg",
+      "id": "55d3"
+    },
+    {
+      "title": "Crimson Tide",
+      "genre": "Thriller, Suspense",
+      "image": "public/backgrounds/crimson_tides.jpeg",
+      "id": "e657"
+    },
+    {
+      "title": "Whispers in the Wind",
+      "genre": "Romance, Drama",
+      "image": "/backgrounds/Whispers_in_the_wind.jpeg",
+      "id": "d834"
+    },
+    {
+      "title": "The Flash",
+      "genre": "Sci-Fi, Fantasy",
+      "image": "/public/backgrounds/the flash.jpeg",
+      "id": "2ad1"
+    },
+    {
+      "title": "How To Get Away With Murder",
+      "genre": "Mystery, Thriller",
+      "image": "/public/backgrounds/htgawm.jpeg",
+      "id": "9ffa"
     }
   ]
 }
