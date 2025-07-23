@@ -6,58 +6,30 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
 
-  const handleChange = e => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(credentials));
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser) {
-      navigate('/clubs');
-    } else {
-      setError('Invalid email or password');
-    }
+    dispatch(loginUser(loginData));
+    navigate('/feed');
   };
 
   return (
-    <div className="auth-container">
-      <h2 className="text-center">Login</h2>
-      {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
+    <div className="auth-form">
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            placeholder="Email"
-            value={credentials.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            placeholder="Password"
-            value={credentials.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-green" style={{ width: '100%' }}>
-          Sign In
-        </button>
+        <input name="email" type="email" placeholder="Email" required onChange={handleChange} />
+        <input name="password" type="password" placeholder="Password" required onChange={handleChange} />
+        <button type="submit">Login</button>
       </form>
-      <p className="text-center" style={{ marginTop: '20px' }}>
-        Don't have an account? <a href="/register">Register</a>
-      </p>
     </div>
   );
 };

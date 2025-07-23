@@ -1,39 +1,27 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
 
-export const fetchClubs = createAsyncThunk('clubs/fetchClubs', async () => {
-  const response = await axios.get('http://localhost:3001/clubs');
-  return response.data;
-});
-
-export const joinClub = createAsyncThunk('clubs/joinClub', async ({ userId, clubId }) => {
-  const response = await axios.post('http://localhost:3001/memberships', {
-    userId,
-    clubId
-  });
-  return response.data;
-});
+const initialState = {
+  clubs: [],
+  joinedClubIds: [],
+};
 
 const clubSlice = createSlice({
   name: 'clubs',
-  initialState: {
-    clubs: [],
-    memberships: [],
-    joinedClubIds: [],
-    status: 'idle',
-  },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchClubs.fulfilled, (state, action) => {
-        state.clubs = action.payload;
-        state.status = 'succeeded';
-      })
-      .addCase(joinClub.fulfilled, (state, action) => {
-        state.memberships.push(action.payload);
-        state.joinedClubIds.push(action.payload.clubId);
-      });
+  initialState,
+  reducers: {
+    setClubs: (state, action) => {
+      state.clubs = action.payload;
+    },
+    joinClub: (state, action) => {
+      if (!state.joinedClubIds.includes(action.payload)) {
+        state.joinedClubIds.push(action.payload);
+      }
+    },
+    leaveClub: (state, action) => {
+      state.joinedClubIds = state.joinedClubIds.filter(id => id !== action.payload);
+    },
   },
 });
 
+export const { setClubs, joinClub, leaveClub } = clubSlice.actions;
 export default clubSlice.reducer;

@@ -1,111 +1,97 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import '../../index.css';
 
 const CreateClub = () => {
-  const user = useSelector((state) => state.auth.user);
-  const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     name: '',
     genre: '',
     description: '',
-    image: '',
+    imageUrl: '',
+    imageFile: null,
   });
 
-  const [error, setError] = useState('');
+  const [preview, setPreview] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Sci-Fi', 'Romance', 'Documentary'];
 
   const handleChange = (e) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+
+    if (name === 'imageUrl') {
+      setPreview(value);
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData(prev => ({ ...prev, imageFile: file }));
+    setPreview(URL.createObjectURL(file));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.genre || !formData.description || !formData.image) {
-      return setError('Please fill in all fields.');
-    }
+    const clubData = {
+      name: formData.name,
+      genre: formData.genre,
+      description: formData.description,
+      image: formData.imageUrl || (formData.imageFile && URL.createObjectURL(formData.imageFile))
+    };
 
-    try {
-      const newClub = {
-        ...formData,
-        creatorId: user.id
-      };
-      await axios.post('http://localhost:3001/clubs', newClub);
-      navigate('/clubs');
-    } catch (err) {
-      console.error('Failed to create club:', err);
-      setError('Something went wrong. Please try again.');
-    }
+    console.log('New club created:', clubData); 
+
+    setSuccessMessage('Club created successfully!');
+    setFormData({
+      name: '',
+      genre: '',
+      description: '',
+      imageUrl: '',
+      imageFile: null,
+    });
+    setPreview(null);
+
+    setTimeout(() => setSuccessMessage(''), 2000);
   };
 
-  if (!user) {
-    return (
-      <div className="container">
-        <p>Please <a href="/login">log in</a> to create a club.</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="container">
-      <div className="card">
-        <h2 className="text-center">Create a New Club</h2>
-        {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              name="name"
-              className="form-control"
-              placeholder="Club Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+    <div className="create-club-container">
+      <h2>Create a Club</h2>
+      <form onSubmit={handleSubmit} className="create-club-form">
+        <input name="name" type="text" placeholder="Club Name" required value={formData.name} onChange={handleChange} />
+
+        <select name="genre" required value={formData.genre} onChange={handleChange}>
+          <option value="">Select Genre</option>
+          {genres.map((g, i) => (
+            <option key={i} value={g}>{g}</option>
+          ))}
+        </select>
+
+        <textarea
+          name="description"
+          placeholder="Club Description"
+          required
+          value={formData.description}
+          onChange={handleChange}
+        />
+
+        <label>Image URL</label>
+        <input type="text" name="imageUrl" placeholder="https://..." value={formData.imageUrl} onChange={handleChange} />
+
+        <label>OR Upload Image</label>
+        <input type="file" accept="image/*" onChange={handleFileChange} />
+
+        {preview && (
+          <div className="preview">
+            <img src={preview} alt="preview" />
           </div>
-          <div className="form-group">
-            <input
-              type="text"
-              name="genre"
-              className="form-control"
-              placeholder="Genre (e.g., Sci-Fi, Comedy, Drama)"
-              value={formData.genre}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <textarea
-              name="description"
-              className="form-control"
-              placeholder="Club Description"
-              rows="4"
-              value={formData.description}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-          <div className="form-group">
-            <input
-              type="url"
-              name="image"
-              className="form-control"
-              placeholder="Club Cover Image URL"
-              value={formData.image}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-green" style={{ width: '100%' }}>
-            Create Club
-          </button>
-        </form>
-      </div>
+        )}
+
+        <button type="submit">Create Club</button>
+      </form>
+
+      {successMessage && <p className="success">{successMessage}</p>}
     </div>
   );
 };

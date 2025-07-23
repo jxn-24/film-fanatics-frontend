@@ -6,122 +6,60 @@
       "email": "kellynjogu09@gmail.com",
       "password": "kelly123",
       "avatar": "https://i.pravatar.cc/150?img=3"
-    },
-    {
-      "id": 2,
-      "username": "Luna",
-      "email": "luna@example.com",
-      "password": "luna123",
-      "avatar": "https://i.pravatar.cc/150?img=5"
-    },
-    {
-      "id": 3,
-      "username": "Alex",
-      "email": "alex@example.com",
-      "password": "alex123",
-      "avatar": "https://i.pravatar.cc/150?img=7"
     }
   ],
   "clubs": [
     {
       "id": 1,
-      "name": "Sci-Fi Dreamers",
+      "name": "Sci-Fi Universe",
       "genre": "Sci-Fi",
-      "description": "Exploring galaxies, aliens and beyond!",
-      "image": "https://images.unsplash.com/photo-1598899134739-e2f636cdce8e",
-      "creatorId": 1
+      "description": "Explore futuristic, techy films with like-minded fans.",
+      "image": "https://source.unsplash.com/400x300/?sci-fi",
+      "creatorId": 1,
+      "members": [1],
+      "watchlist": ["The Matrix", "Arrival", "Blade Runner 2049"],
+      "topMovie": "Interstellar"
     },
     {
       "id": 2,
-      "name": "Comedy Central",
+      "name": "Laugh Riot",
       "genre": "Comedy",
-      "description": "Laughter is our therapy. Join us!",
-      "image": "https://images.unsplash.com/photo-1601933471620-1e2fcda9e9f8",
-      "creatorId": 2
-    },
-    {
-      "id": 3,
-      "name": "Mystery & Thriller",
-      "genre": "Drama",
-      "description": "For fans of suspense and plot twists.",
-      "image": "https://images.unsplash.com/photo-1511988617509-a57c8a288659",
-      "creatorId": 3
+      "description": "Share laughs and comedy classics.",
+      "image": "https://source.unsplash.com/400x300/?comedy",
+      "creatorId": 1,
+      "members": [],
+      "watchlist": ["Superbad", "Step Brothers"],
+      "topMovie": "The Hangover"
     }
-  ],
-  "memberships": [
-    { "id": 1, "userId": 1, "clubId": 1 },
-    { "id": 2, "userId": 1, "clubId": 2 },
-    { "id": 3, "userId": 2, "clubId": 1 },
-    { "id": 4, "userId": 2, "clubId": 3 },
-    { "id": 5, "userId": 3, "clubId": 2 },
-    { "id": 6, "userId": 3, "clubId": 1 }
   ],
   "posts": [
     {
       "id": 1,
-      "clubId": 1,
       "userId": 1,
-      "title": "Best Alien Films?",
-      "body": "What are your favorite extraterrestrial movies?",
-      "likes": 5,
-      "date": "2025-07-21",
-      "author": {
-        "username": "Kelly",
-        "avatar": "https://i.pravatar.cc/150?img=3"
-      },
-      "comments": [
-        {
-          "id": 101,
-          "userId": 2,
-          "username": "Luna",
-          "avatar": "https://i.pravatar.cc/150?img=5",
-          "text": "Arrival was mind-blowing!",
-          "date": "2025-07-21"
-        }
-      ]
+      "user": "Kelly",
+      "text": "Interstellar was a journey through space and time.",
+      "likes": 10,
+      "comments": ["Absolutely!", "Great visuals."]
     },
     {
       "id": 2,
-      "clubId": 2,
-      "userId": 2,
-      "title": "Funniest Sitcom Ever?",
-      "body": "Friends? Brooklyn Nine-Nine? Share your picks!",
-      "likes": 3,
-      "date": "2025-07-21",
-      "author": {
-        "username": "Luna",
-        "avatar": "https://i.pravatar.cc/150?img=5"
-      },
-      "comments": [
-        {
-          "id": 201,
-          "userId": 3,
-          "username": "Alex",
-          "avatar": "https://i.pravatar.cc/150?img=7",
-          "text": "Brooklyn Nine-Nine all day!",
-          "date": "2025-07-21"
-        }
-      ]
+      "userId": 1,
+      "user": "Kelly",
+      "text": "I just joined the Sci-Fi Universe club 🚀",
+      "likes": 5,
+      "comments": []
     }
   ],
-  "watchedMovies": [
+  "comments": [
     {
       "id": 1,
-      "userId": 1,
-      "title": "Inception",
-      "genre": "Sci-Fi",
-      "rating": 5,
-      "review": "Mind-bending and visually stunning!",
-      "dateWatched": "2025-07-20"
+      "postId": 1,
+      "text": "Absolutely!"
     },
     {
       "id": 2,
-      "userId": 2,
-      "title": "The Hangover",
-      "genre": "Comedy",
-      "rating": 4,
-      "review": "Hilarious from start to finish!",
-      "dateWatched": "2025-07-19"
+      "postId": 1,
+      "text": "Great visuals."
     }
   ]
 }
