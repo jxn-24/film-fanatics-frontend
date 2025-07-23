@@ -11,11 +11,11 @@ const Explore = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setTrending([
-      { title: 'The Last Frontier', genre: 'Action, Adventure' },
-      { title: 'Echoes of the Past', genre: 'Drama, History' },
-      { title: 'Crimson Tide', genre: 'Thriller, Suspense' },
-    ]);
+    // Fetch trending data from db.json
+    fetch('http://localhost:3001/trending')
+      .then((response) => response.json())
+      .then((data) => setTrending(data))
+      .catch((error) => console.error('Error fetching trending data:', error));
 
     if (posts.length === 0) {
       dispatch(setPosts([
@@ -55,6 +55,7 @@ const Explore = () => {
       <div className="trending-section">
         {trending.map((movie, idx) => (
           <div key={idx} className="trending-card">
+            <img src={movie.image} alt={movie.title} className="trending-image" />
             <h4>{movie.title}</h4>
             <p>{movie.genre}</p>
           </div>

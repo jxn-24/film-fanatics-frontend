@@ -15,8 +15,15 @@ const Landing = () => {
         <h1>Connect with Fellow Film Fanatics</h1>
         <p>Join our community of movie and TV series lovers. Discover, share, and discuss your passion.</p>
         <button onClick={handleGetStarted}>Get Started</button>
+        <div className="footer">
+          <p>Explore the World of Cinema</p>
+          <p>Discover a platform designed for film lovers, offering a space to connect, discuss, and share your passion for movies and TV series.</p>
+          <p>&copy; {new Date().getFullYear()} Film Fanatics. All rights reserved.</p>
+        </div>
       </div>
     </div>
+    
+    
   );
 };
 

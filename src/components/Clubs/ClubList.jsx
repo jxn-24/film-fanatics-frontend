@@ -7,14 +7,11 @@ const ClubList = () => {
   const [clubs, setClubs] = useState([]);
 
   useEffect(() => {
-    setClubs([
-      { id: 1, name: 'Action Movie Buffs', genre: 'Action', members: 120 },
-      { id: 2, name: 'Laugh Riot', genre: 'Comedy', members: 85 },
-      { id: 3, name: 'Drama Queens & Kings', genre: 'Drama', members: 150 },
-      { id: 4, name: 'Sci-Fi Universe', genre: 'Sci-Fi', members: 110 },
-    ]);
+    fetch('http://localhost:3001/clubs')
+      .then((response) => response.json())
+      .then((data) => setClubs(data))
+      .catch((error) => console.error('Error fetching clubs:', error));
   }, []);
-
   const handleJoin = (id) => {
     navigate(`/clubs/${id}`);
   };
@@ -25,6 +22,7 @@ const ClubList = () => {
       <div className="club-cards">
         {clubs.map((club) => (
           <div key={club.id} className="club-card">
+            <img src={club.image} alt={club.name} className="club-image" />
             <h3>{club.name}</h3>
             <p>Genre: {club.genre}</p>
             <p>{club.members} members</p>

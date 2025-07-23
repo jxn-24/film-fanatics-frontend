@@ -26,14 +26,16 @@ const Register = () => {
 
   return (
     <div className="auth-form">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="username" type="text" placeholder="Username" required onChange={handleChange} />
-        <input name="email" type="email" placeholder="Email" required onChange={handleChange} />
-        <input name="password" type="password" placeholder="Password" required onChange={handleChange} />
-        <input name="avatar" type="text" placeholder="Avatar URL (optional)" onChange={handleChange} />
-        <button type="submit">Sign Up</button>
-      </form>
+      <div className="auth-overlay">
+        <h2>Sign Up</h2>
+        <form onSubmit={handleSubmit}>
+          <input name="username" type="text" placeholder="Username" required onChange={handleChange} />
+          <input name="email" type="email" placeholder="Email" required onChange={handleChange} />
+          <input name="password" type="password" placeholder="Password" required onChange={handleChange} />
+          <input name="avatar" type="text" placeholder="Avatar URL (optional)" onChange={handleChange} />
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
     </div>
   );
 };
