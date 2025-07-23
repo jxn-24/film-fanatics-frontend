@@ -1,0 +1,65 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Kelly",
+      "email": "kellynjogu09@gmail.com",
+      "password": "kelly123",
+      "avatar": "https://i.pravatar.cc/150?img=3"
+    }
+  ],
+  "clubs": [
+    {
+      "id": 1,
+      "name": "Sci-Fi Universe",
+      "genre": "Sci-Fi",
+      "description": "Explore futuristic, techy films with like-minded fans.",
+      "image": "https://source.unsplash.com/400x300/?sci-fi",
+      "creatorId": 1,
+      "members": [1],
+      "watchlist": ["The Matrix", "Arrival", "Blade Runner 2049"],
+      "topMovie": "Interstellar"
+    },
+    {
+      "id": 2,
+      "name": "Laugh Riot",
+      "genre": "Comedy",
+      "description": "Share laughs and comedy classics.",
+      "image": "https://source.unsplash.com/400x300/?comedy",
+      "creatorId": 1,
+      "members": [],
+      "watchlist": ["Superbad", "Step Brothers"],
+      "topMovie": "The Hangover"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "user": "Kelly",
+      "text": "Interstellar was a journey through space and time.",
+      "likes": 10,
+      "comments": ["Absolutely!", "Great visuals."]
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "user": "Kelly",
+      "text": "I just joined the Sci-Fi Universe club 🚀",
+      "likes": 5,
+      "comments": []
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "text": "Absolutely!"
+    },
+    {
+      "id": 2,
+      "postId": 1,
+      "text": "Great visuals."
+    }
+  ]
+}
