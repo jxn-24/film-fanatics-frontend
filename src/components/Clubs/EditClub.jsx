@@ -1,97 +1,107 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const EditClub = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [clubData, setClubData] = useState({ name: '', genre: '', description: '', image: '' });
-  const [error, setError] = useState('');
+  const [clubData, setClubData] = useState(null);
+  const [form, setForm] = useState({ name: '', genre: '', description: '', image: '' });
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     const fetchClub = async () => {
       try {
         const res = await axios.get(`http://localhost:3001/clubs/${id}`);
         setClubData(res.data);
-      } catch (err) {
-        setError('Failed to fetch club data');
+        setForm({
+          name: res.data.name,
+          genre: res.data.genre,
+          description: res.data.description,
+          image: res.data.image,
+        });
+      } catch (error) {
+        console.error('Error fetching club:', error);
       }
     };
     fetchClub();
   }, [id]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setClubData((prev) => ({ ...prev, [name]: value }));
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
+    if (!user || user.id !== clubData.creatorId) {
+      alert('You are not authorized to edit this club.');
+      return;
+    }
+
     try {
-      await axios.put(`http://localhost:3001/clubs/${id}`, clubData);
+      await axios.patch(`http://localhost:3001/clubs/${id}`, form);
       navigate(`/clubs/${id}`);
-    } catch (err) {
-      setError('Failed to update club');
+    } catch (error) {
+      console.error('Error updating club:', error);
     }
   };
 
+  if (!clubData) return <div>Loading...</div>;
+
   return (
     <div className="container">
-      <h2>Edit Club</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Club Name</label>
-          <input
-            type="text"
-            className="form-control"
-            name="name"
-            value={clubData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Genre</label>
-          <select
-            className="form-control"
-            name="genre"
-            value={clubData.genre}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select genre</option>
-            <option value="Action">Action</option>
-            <option value="Comedy">Comedy</option>
-            <option value="Drama">Drama</option>
-            <option value="Sci-Fi">Sci-Fi</option>
-            <option value="Horror">Horror</option>
-            <option value="Classic">Classic</option>
-            <option value="Indie">Indie</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Description</label>
-          <textarea
-            className="form-control"
-            name="description"
-            value={clubData.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Image URL</label>
-          <input
-            type="text"
-            className="form-control"
-            name="image"
-            value={clubData.image}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit" className="btn btn-green">Update Club</button>
-      </form>
+      <div className="card">
+        <h2 className="text-center">Edit Club</h2>
+        <form onSubmit={handleUpdate}>
+          <div className="form-group">
+            <input
+              type="text"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="Club Name"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="genre"
+              value={form.genre}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="Genre"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <textarea
+              name="description"
+              value={form.description}
+              onChange={handleChange}
+              className="form-control"
+              rows="4"
+              placeholder="Description"
+              required
+            ></textarea>
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="image"
+              value={form.image}
+              onChange={handleChange}
+              className="form-control"
+              placeholder="Image URL"
+            />
+          </div>
+          <button type="submit" className="btn btn-green" style={{ width: '100%' }}>
+            Update Club
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

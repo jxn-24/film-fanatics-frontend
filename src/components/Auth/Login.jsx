@@ -1,57 +1,63 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../store/authSlice';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleChange = e => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
-    try {
-      const response = await axios.get(`http://localhost:3001/users?email=${email}&password=${password}`);
-      if (response.data.length > 0) {
-        localStorage.setItem('user', JSON.stringify(response.data[0]));
-        navigate('/clubs');
-      } else {
-        setError('Invalid credentials');
-      }
-    } catch (err) {
-      console.error(err);
-      setError('Something went wrong. Please try again.');
+    dispatch(loginUser(credentials));
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      navigate('/clubs');
+    } else {
+      setError('Invalid email or password');
     }
   };
 
   return (
     <div className="auth-container">
-      <h2>Welcome back</h2>
-      {error && <p className="error">{error}</p>}
+      <h2 className="text-center">Login</h2>
+      {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Email</label>
           <input
             type="email"
+            name="email"
             className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            value={credentials.email}
+            onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label>Password</label>
           <input
             type="password"
+            name="password"
             className="form-control"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            value={credentials.password}
+            onChange={handleChange}
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">Log in</button>
+        <button type="submit" className="btn btn-green" style={{ width: '100%' }}>
+          Sign In
+        </button>
       </form>
-      <p>New to Film Fanatics? <a href="/register">Sign up</a></p>
+      <p className="text-center" style={{ marginTop: '20px' }}>
+        Don't have an account? <a href="/register">Register</a>
+      </p>
     </div>
   );
 };
