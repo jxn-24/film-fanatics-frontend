@@ -8,7 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({
-    email: '',
+    identifier: '',
     password: ''
   });
 
@@ -24,12 +24,15 @@ const Login = () => {
 
   return (
     <div className="auth-form">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="email" type="email" placeholder="Email" required onChange={handleChange} />
-        <input name="password" type="password" placeholder="Password" required onChange={handleChange} />
-        <button type="submit">Login</button>
-      </form>
+      <div className="auth-overlay">
+        <h2>Welcome Back!</h2>
+        <h3>Login</h3>
+        <form onSubmit={handleSubmit}>
+          <input name="identifier" type="text" placeholder="Email or Username" required onChange={handleChange} />
+          <input name="password" type="password" placeholder="Password" required onChange={handleChange} />
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </div>
   );
 };

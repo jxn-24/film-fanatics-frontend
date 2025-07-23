@@ -14,27 +14,23 @@ const ClubDetails = () => {
   const [editData, setEditData] = useState({});
 
   useEffect(() => {
-    const mockClub = {
-      id,
-      name: 'Sci-Fi Universe',
-      genre: 'Sci-Fi',
-      members: 110,
-      topMovie: 'Interstellar',
-      watchlist: ['The Matrix', 'Arrival', 'Blade Runner 2049'],
-    };
+    fetch(`http://localhost:3001/clubs/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setClub(data);
+        setEditData({
+          name: data.name,
+          genre: data.genre,
+          description: 'A club for ' + data.genre.toLowerCase() + ' lovers',
+          image: data.image,
+        });
+      })
+      .catch((error) => console.error('Error fetching club:', error));
 
-    setClub(mockClub);
-    setEditData({
-      name: mockClub.name,
-      genre: mockClub.genre,
-      description: 'A club for sci-fi lovers',
-      image: '',
-    });
-
-    setComments([
-      { id: 1, text: 'I loved Interstellar!', likes: 2 },
-      { id: 2, text: 'The Matrix changed cinema forever.', likes: 3 },
-    ]);
+    fetch('http://localhost:3001/comments')
+      .then((response) => response.json())
+      .then((data) => setComments(data.filter(c => c.clubId === parseInt(id))))
+      .catch((error) => console.error('Error fetching comments:', error));
   }, [id]);
 
   const handleJoin = () => {
@@ -51,42 +47,57 @@ const ClubDetails = () => {
     if (newComment.trim()) {
       const newEntry = {
         id: comments.length + 1,
+        clubId: parseInt(id),
         text: newComment,
         likes: 0,
       };
-      setComments([newEntry, ...comments]);
+      fetch('http://localhost:3001/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newEntry),
+      })
+        .then(() => setComments([newEntry, ...comments]))
+        .catch((error) => console.error('Error adding comment:', error));
       setNewComment('');
     }
   };
 
   const handleLike = (id) => {
-    const updated = comments.map((c) =>
-      c.id === id ? { ...c, likes: c.likes + 1 } : c
-    );
-    setComments(updated);
+    const comment = comments.find(c => c.id === id);
+    const updated = { ...comment, likes: comment.likes + 1 };
+    fetch(`http://localhost:3001/comments/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updated),
+    })
+      .then(() => {
+        setComments(comments.map(c => c.id === id ? updated : c));
+      })
+      .catch((error) => console.error('Error liking comment:', error));
   };
 
   if (!club) return <p>Loading club...</p>;
+
 
   return (
     <div className="club-details">
       <h2>{club.name}</h2>
       <p><strong>Genre:</strong> {club.genre}</p>
       <p><strong>Members:</strong> {club.members + (isMember ? 1 : 0)}</p>
+      <img src={club.image} alt={club.name} className="club-image" />
 
-      <h3>Top Movie: {club.topMovie}</h3>
-
+      <h3>Top Movie: {club.topMovie || 'Not specified'}</h3>
       <h4>Watchlist</h4>
       <ul>
-        {club.watchlist.map((movie, idx) => (
+        {(club.watchlist || []).map((movie, idx) => (
           <li key={idx}>{movie}</li>
         ))}
       </ul>
 
       {!isMember ? (
-        <button className="join-btn" onClick={handleJoin}>Join Club</button>
+        <button className="join-btn">Join Club</button>
       ) : (
-        <button className="leave-btn" onClick={handleLeave}>Leave Club</button>
+        <button className="leave-btn">Leave Club</button>
       )}
 
       {isMember && (
@@ -125,7 +136,7 @@ const ClubDetails = () => {
             type="text"
             value={editData.image}
             onChange={(e) => setEditData({ ...editData, image: e.target.value })}
-            placeholder="Image URL (optional)"
+            placeholder="Image path"
           />
           <button onClick={() => {
             alert('Club updated successfully!');
@@ -147,7 +158,7 @@ const ClubDetails = () => {
         </div>
         <ul className="comments">
           {comments.map((c) => (
-            <li key={c.id}>
+            <li key={c.id} className="comment-item">
               {c.text}
               <span className="likes" onClick={() => handleLike(c.id)}>❤️ {c.likes}</span>
             </li>

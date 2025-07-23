@@ -9,28 +9,16 @@
     }
   ],
   "clubs": [
-    {
-      "id": 1,
-      "name": "Sci-Fi Universe",
-      "genre": "Sci-Fi",
-      "description": "Explore futuristic, techy films with like-minded fans.",
-      "image": "https://source.unsplash.com/400x300/?sci-fi",
-      "creatorId": 1,
-      "members": [1],
-      "watchlist": ["The Matrix", "Arrival", "Blade Runner 2049"],
-      "topMovie": "Interstellar"
-    },
-    {
-      "id": 2,
-      "name": "Laugh Riot",
-      "genre": "Comedy",
-      "description": "Share laughs and comedy classics.",
-      "image": "https://source.unsplash.com/400x300/?comedy",
-      "creatorId": 1,
-      "members": [],
-      "watchlist": ["Superbad", "Step Brothers"],
-      "topMovie": "The Hangover"
-    }
+    { "id": 1, "name": "Action Movie Buffs", "genre": "Action", "members": 120, "image": "src/assets/Club images/action_buffs.jpeg" },
+    { "id": 2, "name": "Laugh Riot", "genre": "Comedy", "members": 85, "image": "src/assets/Club images/laugh_riot.jpeg" },
+    { "id": 3, "name": "Drama Queens & Kings", "genre": "Drama", "members": 150, "image": "src/assets/Club images/drama_1.jpeg" },
+    { "id": 4, "name": "Sci-Fi Universe", "genre": "Sci-Fi", "members": 110, "image": "src/assets/Club images/scifi_1.jpeg" },
+    { "id": 5, "name": "Horror Haven", "genre": "Horror", "members": 90, "image": "src/assets/Club images/horror_1.jpeg" },
+    { "id": 6, "name": "Romantic Escapades", "genre": "Romance", "members": 75, "image": "src/assets/Club images/romance_1.jpeg" },
+    { "id": 7, "name": "Documentary Enthusiasts", "genre": "Documentary", "members": 60, "image": "src/assets/Club images/documentary_club.jpeg" },
+    { "id": 8, "name": "Animated Adventures", "genre": "Animation", "members": 100, "image": "src/assets/Club images/animation_1.jpeg" },
+    { "id": 9, "name": "Thriller Seekers", "genre": "Thriller", "members": 80, "image": "src/assets/Club images/thriller_1.jpeg" },
+    { "id": 10, "name": "Fantasy Realms", "genre": "Fantasy", "members": 95, "image": "src/assets/Club images/fantasy_1.jpeg" }
   ],
   "posts": [
     {
@@ -61,5 +49,13 @@
       "postId": 1,
       "text": "Great visuals."
     }
+  ],
+  "trending": [
+    { "title": "The Last Frontier", "genre": "Action, Adventure", "image": "src/assets/the_last_frontier.jpeg" },
+    { "title": "Echoes of the Past", "genre": "Drama, History", "image": "src/assets/echoes_of_the_past.jpeg" },
+    { "title": "Crimson Tide", "genre": "Thriller, Suspense", "image": "src/assets/crimson_tides.jpeg" },
+    { "title": "Whispers in the Wind", "genre": "Romance, Drama", "image": "src/assets/Whispers_in_the_wind.jpeg" },
+    { "title": "The Flash", "genre": "Sci-Fi, Fantasy", "image": "src/assets/the flash.jpeg" },
+    { "title": "How To Get Away With Murder", "genre": "Mystery, Thriller", "image": "src/assets/htgawm.jpeg" }
   ]
 }
