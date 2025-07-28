@@ -20,7 +20,7 @@ A React + Vite web app for joining, exploring, and managing TV & Movie discussio
 
 ### 1. 📦 Clone the repo
 ```bash
-git clone https://github.com/your-username/film-fanatics-frontend.git
+git clone https://github.com/jxn-24/film-fanatics-frontend.git
 cd film-fanatics-frontend
 ```
 

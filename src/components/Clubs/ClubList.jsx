@@ -5,16 +5,34 @@ import '../../index.css';
 const ClubList = () => {
   const navigate = useNavigate();
   const [clubs, setClubs] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch('http://localhost:3001/clubs')
-      .then((response) => response.json())
-      .then((data) => setClubs(data))
-      .catch((error) => console.error('Error fetching clubs:', error));
+      .then((response) => {
+        if (!response.ok) throw new Error('Failed to fetch clubs');
+        return response.json();
+      })
+      .then((data) => {
+        setClubs(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching clubs:', error);
+        setError('Failed to load clubs. Please try again later.');
+        setLoading(false);
+      });
   }, []);
+
   const handleJoin = (id) => {
     navigate(`/clubs/${id}`);
   };
+
+  if (loading) return <p>Loading clubs...</p>;
+  if (error) return <p className="error">{error}</p>;
+
 
   return (
     <div className="club-list">
