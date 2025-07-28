@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import '../../index.css';
+import { useNavigate } from 'react-router-dom';
 
 const CreateClub = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     genre: '',
@@ -32,29 +34,53 @@ const CreateClub = () => {
       name: formData.name,
       genre: formData.genre,
       description: formData.description,
-      image: formData.imageFile ? URL.createObjectURL(formData.imageFile) : '',
+      image: formData.imageFile ? URL.createObjectURL(formData.imageFile) : '/default-club-image.jpg', // Use default image if none provided
+      members: 0,
+      watchlist: [],
+      topMovie: '',
     };
 
-    console.log('New club created:', clubData); 
-
-    setSuccessMessage('Club created successfully!');
-    setFormData({
-      name: '',
-      genre: '',
-      description: '',
-      imageFile: null,
-    });
-    setPreview(null);
-
-    setTimeout(() => setSuccessMessage(''), 2000);
+    fetch('http://localhost:3001/clubs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(clubData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setSuccessMessage('Club created successfully!');
+        setFormData({
+          name: '',
+          genre: '',
+          description: '',
+          imageFile: null,
+        });
+        setPreview(null);
+        setTimeout(() => {
+          setSuccessMessage('');
+          navigate('/clubs'); // Navigate to club list after creation
+        }, 2000);
+      })
+      .catch((error) => console.error('Error creating club:', error));
   };
 
   return (
     <div className="create-club-container">
       <form onSubmit={handleSubmit} className="create-club-form">
         <h2>Create a Club</h2>
-        <input name="name" type="text" placeholder="Club Name" required value={formData.name} onChange={handleChange} />
-        <select name="genre" required value={formData.genre} onChange={handleChange}>
+        <input
+          name="name"
+          type="text"
+          placeholder="Club Name"
+          required
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <select
+          name="genre"
+          required
+          value={formData.genre}
+          onChange={handleChange}
+        >
           <option value="">Select Genre</option>
           {genres.map((g, i) => (
             <option key={i} value={g}>{g}</option>
@@ -68,7 +94,11 @@ const CreateClub = () => {
           onChange={handleChange}
         />
         <label>Upload Image</label>
-        <input type="file" accept="image/*" onChange={handleFileChange} />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+        />
         {preview && (
           <div className="preview">
             <img src={preview} alt="preview" />
