@@ -14,70 +14,70 @@
       "name": "Action Movie Buffs",
       "genre": "Action",
       "members": 120,
-      "image": "src/assets/Club images/action_buffs.jpeg"
+      "image": "/club_images/action_buffs.jpeg"
     },
     {
       "id": "2",
       "name": "Laugh Riot",
       "genre": "Comedy",
       "members": 85,
-      "image": "src/assets/Club images/laugh_riot.jpeg"
+      "image": "/club_images/laugh_riot.jpeg"
     },
     {
       "id": "3",
       "name": "Drama Queens & Kings",
       "genre": "Drama",
       "members": 150,
-      "image": "src/assets/Club images/drama_1.jpeg"
+      "image": "/club_images/drama_1.jpeg"
     },
     {
       "id": "4",
       "name": "Sci-Fi Universe",
       "genre": "Sci-Fi",
       "members": 110,
-      "image": "src/assets/Club images/scifi_1.jpeg"
+      "image": "/club_images/scifi_1.jpeg"
     },
     {
       "id": "5",
       "name": "Horror Haven",
       "genre": "Horror",
       "members": 90,
-      "image": "src/assets/Club images/horror_1.jpeg"
+      "image": "/club_images/horror_1.jpeg"
     },
     {
       "id": "6",
       "name": "Romantic Escapades",
       "genre": "Romance",
       "members": 75,
-      "image": "src/assets/Club images/romance_1.jpeg"
+      "image": "/club_images/romance_1.jpeg"
     },
     {
       "id": "7",
       "name": "Documentary Enthusiasts",
       "genre": "Documentary",
       "members": 60,
-      "image": "src/assets/Club images/documentary_club.jpeg"
+      "image": "/club_images/documentary_club.jpeg"
     },
     {
       "id": "8",
       "name": "Animated Adventures",
       "genre": "Animation",
       "members": 100,
-      "image": "src/assets/Club images/animation_1.jpeg"
+      "image": "/club_images/animation_1.jpeg"
     },
     {
       "id": "9",
       "name": "Thriller Seekers",
       "genre": "Thriller",
       "members": 80,
-      "image": "src/assets/Club images/thriller_1.jpeg"
+      "image": "/club_images/thriller_1.jpeg"
     },
     {
       "id": "10",
       "name": "Fantasy Realms",
       "genre": "Fantasy",
       "members": 95,
-      "image": "src/assets/Club images/fantasy_1.jpeg"
+      "image": "public/club_images/fantasy_1.jpeg"
     },
     {
       "id": "e3df",
@@ -127,37 +127,37 @@
     {
       "title": "The Last Frontier",
       "genre": "Action, Adventure",
-      "image": "src/assets/the_last_frontier.jpeg",
+      "image": "public/backgrounds/the_last_frontier.jpeg",
       "id": "f368"
     },
     {
       "title": "Echoes of the Past",
       "genre": "Drama, History",
-      "image": "src/assets/echoes_of_the_past.jpeg",
+      "image": "public/backgrounds/echoes_of_the_past.jpeg",
       "id": "55d3"
     },
     {
       "title": "Crimson Tide",
       "genre": "Thriller, Suspense",
-      "image": "src/assets/crimson_tides.jpeg",
+      "image": "public/backgrounds/crimson_tides.jpeg",
       "id": "e657"
     },
     {
       "title": "Whispers in the Wind",
       "genre": "Romance, Drama",
-      "image": "src/assets/Whispers_in_the_wind.jpeg",
+      "image": "/backgrounds/Whispers_in_the_wind.jpeg",
       "id": "d834"
     },
     {
       "title": "The Flash",
       "genre": "Sci-Fi, Fantasy",
-      "image": "src/assets/the flash.jpeg",
+      "image": "/public/backgrounds/the flash.jpeg",
       "id": "2ad1"
     },
     {
       "title": "How To Get Away With Murder",
       "genre": "Mystery, Thriller",
-      "image": "src/assets/htgawm.jpeg",
+      "image": "/public/backgrounds/htgawm.jpeg",
       "id": "9ffa"
     }
   ]
