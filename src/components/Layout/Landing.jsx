@@ -9,6 +9,8 @@ const Landing = () => {
     navigate('/clubs');
   };
 
+  
+
   return (
     <div className="landing-container">
       <div className="landing-content">

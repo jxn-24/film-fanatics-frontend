@@ -117,7 +117,7 @@ body {
   background-color: #0f0625;
   color: white;
   font-size: larger;
-  border: none;
+  border: 2px solid #1a4730;
   padding: 0.75rem;
   border-radius: 6px;
   font-weight: bold;
@@ -129,7 +129,7 @@ body {
 }
 
 .landing-container {
-  background-image: url('src/assets/WhatsApp Image 2025-07-22 at 23.12.39.jpeg');
+  background-image: url('src/assets/background.jpeg');
   background-size: cover;
   background-position: center;
   height: calc(100vh - 70px);
@@ -161,7 +161,7 @@ body {
   background-color: #1a4730;
   color: black;
   padding: 0.75rem 2rem;
-  border: none;
+  border: 2px solid #144022;
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
@@ -245,7 +245,7 @@ body {
 .club-card button {
   background-color: #28a745;
   color: white;
-  border: none;
+  border: 2px solid #218838;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
@@ -281,7 +281,7 @@ body {
 .join-btn, .leave-btn {
   background-color: #28a745;
   color: white;
-  border: none;
+  border: 2px solid #218838;
   padding: 0.75rem 1.5rem;
   border-radius: 5px;
   cursor: pointer;
@@ -290,6 +290,7 @@ body {
 
 .leave-btn {
   background-color: #dc3545;
+  border: 2px solid #c82333;
 }
 
 .join-btn:hover {
@@ -307,7 +308,7 @@ body {
 .admin-actions button {
   background-color: #17a2b8;
   color: white;
-  border: none;
+  border: 2px solid #138496;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   margin-right: 1rem;
@@ -342,7 +343,7 @@ body {
 .edit-form button {
   background-color: #17a2b8;
   color: white;
-  border: none;
+  border: 2px solid #138496;
   padding: 0.75rem 1.5rem;
   border-radius: 5px;
   cursor: pointer;
@@ -373,7 +374,7 @@ body {
   padding: 0.5rem 1rem;
   background-color: #1a4730;
   color: white;
-  border: none;
+  border: 2px solid #144022;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -469,6 +470,20 @@ body {
   color: #ff4444;
 }
 
+.post-actions button {
+  background-color: #dc3545;
+  color: white;
+  border: 2px solid #c82333;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.post-actions button:hover {
+  background-color: #c82333;
+}
+
 .comment-box {
   display: flex;
   gap: 0.5rem;
@@ -487,6 +502,7 @@ body {
   border: none;
   background-color: #1a4730;
   color: white;
+  border: 2px solid #144022;
   border-radius: 5px;
 }
 
@@ -557,7 +573,7 @@ body {
   background-color: #28a745;
   color: white;
   padding: 1rem 2rem;
-  border: none;
+  border: 2px solid #218838;
   border-radius: 5px;
   font-size: 1.2rem;
   font-weight: bold;
@@ -587,7 +603,7 @@ body {
 }
 
 .profile-container {
-  min-height: calc(100vh - 80px); 
+  min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -606,7 +622,8 @@ body {
   text-align: center;
 }
 
-.profile-card input {
+.profile-card input,
+.profile-card textarea {
   display: block;
   width: 100%;
   padding: 0.9rem 1rem;
@@ -617,9 +634,23 @@ body {
   transition: border 0.2s ease;
 }
 
-.profile-card input:focus {
+.profile-card textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.profile-card input:focus,
+.profile-card textarea:focus {
   border-color: #1a4730;
   outline: none;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 1rem auto;
 }
 
 .profile-buttons {
@@ -635,7 +666,7 @@ body {
   color: #fff;
   padding: 0.75rem 1.8rem;
   font-size: 1rem;
-  border: none;
+  border: 2px solid #144022;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
@@ -646,6 +677,71 @@ body {
   background-color: #144022;
 }
 
+.post-section {
+  margin-top: 2rem;
+}
+
+.post-form {
+  margin-bottom: 1.5rem;
+}
+
+.post-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.post-form button {
+  background-color: #28a745;
+  color: white;
+  border: 2px solid #218838;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.post-form button:hover {
+  background-color: #218838;
+}
+
+.post-list {
+  margin-top: 1rem;
+}
+
+.post-card {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-card p {
+  margin-bottom: 0.5rem;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.post-actions button {
+  background-color: #dc3545;
+  color: white;
+  border: 2px solid #c82333;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.post-actions button:hover {
+  background-color: #c82333;
+}
 
 button,
 a,
@@ -655,7 +751,6 @@ svg,
 [role="button"] {
   cursor: pointer;
 }
-
 
 @media screen and (max-width: 768px) {
   .navbar {
@@ -677,7 +772,7 @@ svg,
     grid-template-columns: 1fr;
   }
 
-  .profile-avatar {
+  .profile-image {
     width: 90px;
     height: 90px;
   }
