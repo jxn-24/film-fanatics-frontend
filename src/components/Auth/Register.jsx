@@ -32,9 +32,9 @@ const Register = () => {
           <input name="username" type="text" placeholder="Username" required onChange={handleChange} />
           <input name="email" type="email" placeholder="Email" required onChange={handleChange} />
           <input name="password" type="password" placeholder="Password" required onChange={handleChange} />
-          <input name="avatar" type="text" placeholder="Avatar URL (optional)" onChange={handleChange} />
           <button type="submit">Sign Up</button>
         </form>
+        <p>Already have an account? <a href="/login">Login</a></p>
       </div>
     </div>
   );

@@ -24,7 +24,6 @@
     "eslint-plugin-react": "^7.37.5",
     "prettier": "^3.6.2",
     "vite": "^5.2.0",
-    "json-server": "^0.17.4",
-    "vercel": "^37.4.2"
+    
   }
 }

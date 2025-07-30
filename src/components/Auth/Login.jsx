@@ -22,6 +22,8 @@ const Login = () => {
     navigate('/feed');
   };
 
+  
+
   return (
     <div className="auth-form">
       <div className="auth-overlay">
@@ -32,6 +34,7 @@ const Login = () => {
           <input name="password" type="password" placeholder="Password" required onChange={handleChange} />
           <button type="submit">Login</button>
         </form>
+        <p>Don't have an account? <a href="/register">Sign up</a></p>
       </div>
     </div>
   );
