@@ -1,34 +1,21 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../../index.css';
-import { useSelector, useDispatch } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    navigate('/login');
-  };
-
   return (
     <nav className="navbar">
-      <div className="logo">Film Fanatics</div>
-      <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        {user && <li><Link to="/explore">Explore</Link></li>}
-        {user && <li><Link to="/clubs">Clubs</Link></li>}
-        {user && <li><Link to="/create-club">Create Club</Link></li>}
-        {user && <li><Link to="/profile">Profile</Link></li>}
-        {!user && <li><Link to="/register">Register</Link></li>}
-        {!user && <li><Link to="/login">Login</Link></li>}
-      </ul>
-      {user && (
-       <button onClick={handleLogout} className="logout-btn">Logout</button>
-      )}
+      <div className="navbar-container">
+        <Link to="/" className="logo">Film Fanatics</Link>
+        <div className="nav-links">
+          <Link to="/">Home</Link>
+          <Link to="/explore">Explore</Link>
+          <Link to="/clubs">Clubs</Link>
+          <Link to="/create-club">Create Club</Link>
+          <Link to="/profile">Profile</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </div>
+      </div>
     </nav>
   );
 };
