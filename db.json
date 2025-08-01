@@ -88,6 +88,16 @@
       "members": 0,
       "watchlist": [],
       "topMovie": ""
+    },
+    {
+      "id": "7574",
+      "name": "Mukimo",
+      "genre": "Horror",
+      "description": "tamu",
+      "image": "blob:http://localhost:5175/a1ae70e8-f384-4dbf-93cb-14e55bb80de9",
+      "members": 0,
+      "watchlist": [],
+      "topMovie": ""
     }
   ],
   "posts": [
