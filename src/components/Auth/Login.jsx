@@ -24,7 +24,7 @@ const Login = () => {
     setError(null);
     try {
       await dispatch(loginUserAsync(loginData));
-      navigate('/feed');
+      navigate('/explore');
     } catch (err) {
       setError(err.message || 'Login failed');
     }

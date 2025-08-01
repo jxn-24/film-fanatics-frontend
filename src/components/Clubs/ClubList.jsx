@@ -45,7 +45,7 @@ const ClubList = () => {
             <h3>{club.name}</h3>
             <p>Genre: {club.genre}</p>
             <p>{club.members} members</p>
-            <button onClick={() => handleJoin(club.id)}>Join Club</button>
+            <button onClick={() => handleJoin(club.id)}>View club</button>
           </div>
         ))}
       </div>
