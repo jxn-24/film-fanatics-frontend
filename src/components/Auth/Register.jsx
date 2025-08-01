@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../store/authSlice';
+import { registerUserAsync } from '../../store/authActions';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Register = () => {
@@ -18,10 +18,15 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(registerUser(formData));
-    navigate('/login');
+    try {
+      await dispatch(registerUserAsync(formData));
+      navigate('/login');
+    } catch (error) {
+      console.error('Registration failed:', error);
+      alert('Registration failed: ' + error.message);
+    }
   };
 
   return (

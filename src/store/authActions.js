@@ -18,13 +18,16 @@ export const loginUserAsync = (credentials) => async (dispatch) => {
     console.log('Response data:', data);
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Login failed');
+      // Already parsed response.json() above, no need to parse again
+      throw new Error(data.message || 'Login failed');
     }
 
     const userWithToken = {
       token: data.access_token,
     };
+
+    // Save token to localStorage for persistence
+    localStorage.setItem('token', data.access_token);
 
     dispatch(loginUser(userWithToken));
   } catch (error) {

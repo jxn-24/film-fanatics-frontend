@@ -5,9 +5,13 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 posts_bp = Blueprint('posts', __name__)
 
-@posts_bp.route('/', methods=['GET', 'POST'])
+@posts_bp.route('/', methods=['GET', 'POST', 'OPTIONS'])
 @jwt_required()
 def posts():
+    if request.method == 'OPTIONS':
+        # CORS preflight request handling
+        return '', 200
+
     if request.method == 'POST':
         data = request.get_json()
         if not data or not data.get('content'):

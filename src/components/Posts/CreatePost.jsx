@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { createPost } from '../../store/postActions';
 
 const CreatePost = () => {
   const dispatch = useDispatch();
@@ -19,18 +20,20 @@ const CreatePost = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch({
-      type: 'posts/addPost',
-      payload: {
-        ...formData,
-        user: user?.name || 'Unknown User',
-        movieId: Date.now(), // Temporary unique ID
-        timestamp: new Date().toISOString(),
-      },
-    });
-    navigate('/explore');
+    try {
+      await dispatch(createPost({
+        title: formData.title,
+        movieTitle: formData.movieTitle,
+        content: formData.content,
+        image: formData.image,
+      })).unwrap();
+      navigate('/explore');
+    } catch (error) {
+      console.error('Failed to create post:', error);
+      // Optionally show error to user
+    }
   };
 
   return (

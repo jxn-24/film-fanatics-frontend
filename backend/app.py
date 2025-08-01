@@ -60,9 +60,10 @@ def create_app():
 
     # Updated CORS config
     CORS(app,
-         resources={r"/api/*": {"origins": "http://localhost:5173"}},
+         resources={r"/api/*": {"origins": "*"}},
          supports_credentials=True,
          allow_headers=["Content-Type", "Authorization"],
+         expose_headers=["Content-Type", "Authorization"],
          methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 
     db.init_app(app)
