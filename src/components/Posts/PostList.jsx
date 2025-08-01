@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Heart, MessageCircle, Share2, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { fetchPosts } from '../../store/postSlice';
 
 const PostList = () => {
-  const posts = useSelector(state => state.posts.posts);
+  const posts = useSelector(state => state.post.posts);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [dispatch]);
 
   // Debug: Log posts to check Redux state
   console.log('Posts in PostList:', posts);

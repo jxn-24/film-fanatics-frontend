@@ -709,3 +709,203 @@ ul, ol {
     padding: 20px;
   }
 }
+
+/* Clubs page styles */
+.club-list {
+max-width: 1200px;
+margin: 20px auto;
+padding: 0 20px;
+}
+
+.club-cards {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 20px;
+}
+
+.club-card {
+background-color: #fff;
+border-radius: 10px;
+padding: 20px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+text-align: center;
+transition: transform 0.3s ease;
+}
+
+.club-card:hover {
+transform: translateY(-4px);
+}
+
+.club-image {
+width: 100%;
+height: 180px;
+object-fit: cover;
+border-radius: 8px;
+margin-bottom: 12px;
+}
+
+.club-card h3 {
+font-weight: 600;
+color: #2e7d32;
+margin-bottom: 8px;
+}
+
+.club-card p {
+color: #666;
+margin-bottom: 12px;
+}
+
+.club-card button {
+background-color: #2e7d32;
+color: white;
+padding: 10px 18px;
+border-radius: 6px;
+font-weight: 600;
+cursor: pointer;
+transition: background-color 0.3s ease;
+border: none;
+}
+
+.club-card button:hover {
+background-color: #1b5e20;
+}
+
+/* Create Club form styles */
+.create-club-container {
+max-width: 600px;
+margin: 40px auto;
+background-color: #fff;
+padding: 30px 25px;
+border-radius: 10px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.create-club-form h2 {
+color: #2e7d32;
+font-weight: 700;
+margin-bottom: 20px;
+text-align: center;
+}
+
+.create-club-form input,
+.create-club-form select,
+.create-club-form textarea {
+width: 100%;
+padding: 12px 15px;
+margin-bottom: 15px;
+border: 1px solid #ccc;
+border-radius: 6px;
+font-size: 16px;
+color: #333;
+font-family: inherit;
+resize: vertical;
+}
+
+.create-club-form label {
+font-weight: 600;
+color: #2e7d32;
+margin-bottom: 6px;
+display: block;
+}
+
+.create-club-form button {
+width: 100%;
+background-color: #2e7d32;
+color: white;
+padding: 12px;
+font-weight: 700;
+border-radius: 6px;
+border: none;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.create-club-form button:hover {
+background-color: #1b5e20;
+}
+
+.preview img {
+max-width: 100%;
+border-radius: 8px;
+margin-bottom: 15px;
+}
+
+.success {
+color: #2e7d32;
+font-weight: 600;
+text-align: center;
+margin-top: 15px;
+}
+
+/* Auth form styles (Login/Register) */
+.auth-form {
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: #f5f5f5;
+padding: 20px;
+}
+
+.auth-overlay {
+background-color: #fff;
+padding: 40px 30px;
+border-radius: 10px;
+box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+width: 100%;
+max-width: 400px;
+text-align: center;
+}
+
+.auth-overlay h2 {
+color: #2e7d32;
+font-weight: 700;
+margin-bottom: 10px;
+}
+
+.auth-overlay h3 {
+color: #666;
+margin-bottom: 25px;
+}
+
+.auth-overlay form input {
+width: 100%;
+padding: 12px 15px;
+margin-bottom: 20px;
+border: 1px solid #ccc;
+border-radius: 6px;
+font-size: 16px;
+color: #333;
+font-family: inherit;
+}
+
+.auth-overlay form button {
+width: 100%;
+background-color: #2e7d32;
+color: white;
+padding: 12px;
+font-weight: 700;
+border-radius: 6px;
+border: none;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.auth-overlay form button:hover {
+background-color: #1b5e20;
+}
+
+.auth-overlay p {
+margin-top: 20px;
+color: #666;
+}
+
+.auth-overlay p a {
+color: #2e7d32;
+font-weight: 600;
+text-decoration: underline;
+}
+
+.auth-overlay p a:hover {
+color: #1b5e20;
+}

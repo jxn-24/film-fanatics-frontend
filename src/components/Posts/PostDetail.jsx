@@ -2,19 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Heart, MessageCircle, Share2, Send, X, Reply } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+import { fetchPost } from '../../store/postActions';
 
 const PostDetails = () => {
   const { postId } = useParams();
   const dispatch = useDispatch();
-  const post = useSelector(state => state.posts.posts.find(p => p.id.toString() === postId));
+  const posts = useSelector(state => state.post.posts || []);
+  const post = posts.find(p => p.id.toString() === postId);
   const comments = useSelector(state => state.comments.comments.filter(c => c.postId.toString() === postId));
   const [commentText, setCommentText] = useState('');
   const [replyText, setReplyText] = useState('');
   const [replyingTo, setReplyingTo] = useState(null);
   const user = useSelector(state => state.auth?.user) || { name: 'Current User' }; // Fallback
 
-  // Fetch comments on mount
+  // Fetch post and comments on mount
   useEffect(() => {
+    dispatch(fetchPost(postId));
     // Removed fetchComments dispatch to prevent resetting comments state and losing persisted comments
   }, [dispatch, postId]);
 

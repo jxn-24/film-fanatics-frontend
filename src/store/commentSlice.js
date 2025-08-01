@@ -16,7 +16,7 @@ const initialComments = (() => {
 export const fetchComments = createAsyncThunk(
   'comments/fetchComments',
     async (postId) => {
-      const response = await fetch('http://localhost:3000/comments?postId=' + postId);
+      const response = await fetch('http://localhost:5000/api/comments?postId=' + postId);
       return await response.json();
     }
 );
@@ -24,7 +24,7 @@ export const fetchComments = createAsyncThunk(
 export const addComment = createAsyncThunk(
   'comments/addComment',
   async ({ postId, content, parentId = null }) => {
-    const response = await fetch('http://localhost:3000/comments', {
+    const response = await fetch('http://localhost:5000/api/comments', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ postId, content, user: 'Current User', timestamp: new Date().toISOString().split('T')[0], parentId }),
