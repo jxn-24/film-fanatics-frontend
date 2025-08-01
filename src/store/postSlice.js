@@ -4,7 +4,7 @@ export const fetchPosts = createAsyncThunk(
   'posts/fetchPosts',
   async () => {
     const token = localStorage.getItem('token');
-    const response = await fetch('http://localhost:5000/api/posts', {
+    const response = await fetch('http://localhost:5000/api/posts/', {
       headers: {
         'Authorization': `Bearer ${token}`,
       },

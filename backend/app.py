@@ -38,7 +38,7 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(users_bp, url_prefix='/api/users')
     app.register_blueprint(clubs_bp, url_prefix='/api/clubs')
-    app.register_blueprint(posts_bp, url_prefix='/api/posts')
+    app.register_blueprint(posts_bp, url_prefix='/api/posts/')
     app.register_blueprint(comments_bp, url_prefix='/api/comments')
     app.register_blueprint(follows_bp, url_prefix='/api/follows')
     app.register_blueprint(tracker_bp, url_prefix='/api/tracker')

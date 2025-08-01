@@ -14,6 +14,7 @@ def posts():
 
     if request.method == 'POST':
         data = request.get_json()
+        print("Received post data:", data)  # Debug log
         if not data or not data.get('content'):
             return jsonify({'message': 'Content is required'}), 400
 
