@@ -26,59 +26,63 @@ def get_all_users():
 @users_bp.route('/profile', methods=['GET'])
 @jwt_required()
 def get_profile():
-    logger.debug("Fetching user profile")
-    user_id = get_jwt_identity()
-    user = User.query.get(user_id)
-    if not user:
-        logger.warning(f"User not found for ID: {user_id}")
-        return jsonify({'message': 'User not found'}), 404
+    try:
+        logger.debug("Fetching user profile")
+        user_id = get_jwt_identity()
+        user = User.query.get(user_id)
+        if not user:
+            logger.warning(f"User not found for ID: {user_id}")
+            return jsonify({'message': 'User not found'}), 404
 
-    # Gather followers and following
-    followers = [{"id": u.id, "name": u.username} for u in user.followers]
-    following = [{"id": u.id, "name": u.username} for u in user.following]
+        # Gather followers and following
+        followers = [{"id": u.id, "name": u.username} for u in user.followers]
+        following = [{"id": u.id, "name": u.username} for u in user.followed]
 
-    # Gather watched movies
-    watched_movies = WatchedMovie.query.filter_by(user_id=user.id).all()
-    watched_movies_data = [{
-        "id": wm.id,
-        "title": wm.movie_title,
-        "poster": "https://via.placeholder.com/150"  # Replace with actual poster logic
-    } for wm in watched_movies]
+        # Gather watched movies
+        watched_movies = WatchedMovie.query.filter_by(user_id=user.id).all()
+        watched_movies_data = [{
+            "id": wm.id,
+            "title": wm.movie_title,
+            "poster": "https://via.placeholder.com/150"  # Replace with actual poster logic
+        } for wm in watched_movies]
 
-    # Gather posts
-    posts_data = [{
-        "id": post.id,
-        "content": post.content,
-        "created_at": post.created_at.isoformat() if post.created_at else None
-    } for post in user.posts]
+        # Gather posts
+        posts_data = [{
+            "id": post.id,
+            "content": post.content,
+            "created_at": post.timestamp.isoformat() if post.timestamp else None
+        } for post in user.posts]
 
-    # Gather joined clubs
-    clubs_data = [{
-        "id": club.id,
-        "name": club.name,
-        "description": club.description
-    } for club in user.clubs]
+        # Gather joined clubs
+        clubs_data = [{
+            "id": club.id,
+            "name": club.name,
+            "description": club.description
+        } for club in user.clubs]
 
-    profile_data = {
-        "id": user.id,
-        "username": user.username,
-        "email": user.email,
-        "profile_info": user.profile_info,
+        profile_data = {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "profile_info": user.profile_info,
 
-        "followersCount": len(followers),
-        "followingCount": len(following),
-        "followers": followers,
-        "followingUsers": following,
+            "followersCount": len(followers),
+            "followingCount": len(following),
+            "followers": followers,
+            "followingUsers": following,
 
-        "moviesWatchedCount": len(watched_movies),
-        "watchedMovies": watched_movies_data,
+            "moviesWatchedCount": len(watched_movies),
+            "watchedMovies": watched_movies_data,
 
-        "posts": posts_data,
-        "joinedClubs": clubs_data
-    }
+            "posts": posts_data,
+            "joinedClubs": clubs_data
+        }
 
-    logger.debug(f"Profile data for user {user_id}: {profile_data}")
-    return jsonify(profile_data)
+        logger.debug(f"Profile data for user {user_id}: {profile_data}")
+        return jsonify(profile_data)
+    except Exception as e:
+        logger.error(f"Error fetching profile for user {user_id}: {str(e)}")
+        return jsonify({'message': 'Internal server error', 'error': str(e)}), 500
 
 @users_bp.route('/profile', methods=['PUT'])
 @jwt_required()

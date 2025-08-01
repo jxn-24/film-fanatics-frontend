@@ -26,8 +26,12 @@ function ClubDetails() {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     })
-      .then(response => {
-        if (!response.ok) throw new Error('Failed to join club');
+      .then(async response => {
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('Error joining club:', errorData);
+          throw new Error(errorData.message || 'Failed to join club');
+        }
         return response.json();
       })
       .then(() => {
