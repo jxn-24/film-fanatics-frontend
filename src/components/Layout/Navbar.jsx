@@ -12,28 +12,31 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <Link to="/" className="logo">Film Fanatics</Link>
-        <div className="nav-links">
-          <Link to="/">Home</Link>
-          <Link to="/explore">Explore</Link>
-          <Link to="/clubs">Clubs</Link>
-          <Link to="/clubs/create">Create Club</Link>
-          {user ? (
-            <>
-              <Link to="/profile">Profile</Link>
-              <button onClick={handleLogout} className="btn-logout">Logout</button>
-            </>
-          ) : (
-            <>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
-            </>
-          )}
-        </div>
-      </div>
-    </nav>
+<nav className="header">
+  <div className="navbar-container">
+    <Link to="/" className="brand">
+      <span className="brand-text">Film Fanatics</span>
+    </Link>
+    <div className="nav-links">
+      {user ? (
+        <>
+          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/explore" className="nav-link">Explore</Link>
+          <Link to="/clubs" className="nav-link">Clubs</Link>
+          <Link to="/clubs/create" className="nav-link">Create Club</Link>
+          <Link to="/profile" className="nav-link">Profile</Link>
+          <button onClick={handleLogout} className="btn-logout nav-link">Logout</button>
+        </>
+      ) : (
+        <>
+          <Link to="/" className="nav-link">Landing</Link>
+          <Link to="/login" className="nav-link">Login</Link>
+          <Link to="/register" className="nav-link">Register</Link>
+        </>
+      )}
+    </div>
+  </div>
+</nav>
   );
 };
 
