@@ -35,7 +35,7 @@ json-server --watch db.json --port 3001 (in another terminal)
 Frontend Deployment: https://film-fanatics-frontend.onrender.com
 Backend Deployment: https://film-fanatics-backend.onrender.com
 Backend Repository: https://github.com/jxn-24/film-fanatics-backend
-Presentation Slides: Google Slides
+Presentation Slides: https://docs.google.com/presentation/d/1HfzJ_1XWdkiL9rjYXRPQ9CSgjFJJIv4CllOrBNqWlb8/edit?usp=sharing
 
 
 # 🔐 Protected Routes
